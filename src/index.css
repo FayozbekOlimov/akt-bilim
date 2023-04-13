@@ -10,10 +10,13 @@
   position: relative;
   width: 100%;
   padding: 16px;
-  height: auto;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 html, body, #root {
   font-family: 'Open Sans', 'sans-serif';
+}
+
+body {
+  background-color: #eee !important;
 }

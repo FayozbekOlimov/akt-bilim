@@ -96,40 +96,68 @@ export const themeSettings = (mode) => {
       h1: {
         fontFamily: ["Open Sans", "sans-serif"].join(","),
         fontSize: 40,
-        // fontWeight: 400,
+        fontWeight: 300,
+        "@media (max-width: 768px)": {
+          fontSize: 36,
+        },
       },
       h2: {
         fontFamily: ["Open Sans", "sans-serif"].join(","),
         fontSize: 32,
-        // fontWeight: 400,
+        fontWeight: 300,
+        "@media (max-width: 768px)": {
+          fontSize: 28,
+        },
       },
       h3: {
         fontFamily: ["Open Sans", "sans-serif"].join(","),
-        fontSize: 24,
-        // fontWeight: 400,
+        fontSize: 28,
+        fontWeight: 400,
+        "@media (max-width: 768px)": {
+          fontSize: 24,
+        },
       },
       h4: {
         fontFamily: ["Open Sans", "sans-serif"].join(","),
-        fontSize: 20,
-        // fontWeight: 400,
+        fontSize: 24,
+        fontWeight: 400,
+        "@media (max-width: 768px)": {
+          fontSize: 20,
+        },
       },
       h5: {
         fontFamily: ["Open Sans", "sans-serif"].join(","),
-        fontSize: 18,
-        // fontWeight: 500,
+        fontSize: 20,
+        fontWeight: 500,
+        "@media (max-width: 768px)": {
+          fontSize: 18,
+        },
       },
       h6: {
         fontFamily: ["Open Sans", "sans-serif"].join(","),
-        fontSize: 14,
-        // fontWeight: 500,
+        fontSize: 18,
+        fontWeight: 500,
+        "@media (max-width: 768px)": {
+          fontSize: 16,
+        },
       },
-      subtitle: {
+      subtitle1: {
         lineHeight: 1.75,
         fontSize: 16,
         fontWeight: 500,
       },
-      body: {
+      subtitle2: {
+        lineHeight: 1.5,
+        fontSize: 15,
+        fontWeight: 500,
+      },
+      body1: {
         lineHeight: 1.4,
+        fontSize: 15,
+        fontWeight: 400,
+      },
+      body2: {
+        lineHeight: 1.2,
         fontSize: 14,
         fontWeight: 400,
       },
