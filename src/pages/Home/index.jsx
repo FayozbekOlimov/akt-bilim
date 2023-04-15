@@ -1,93 +1,27 @@
-import { styled, useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import MuiDrawer from "@mui/material/Drawer";
-import MuiAppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
+import { useEffect, useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useTheme } from "@mui/material/styles";
+import {
+  ListItemText,
+  ListItemIcon,
+  Box,
+  List,
+  Toolbar,
+  ListItemButton,
+  Typography,
+  ListItem,
+  IconButton,
+  Divider,
+} from "@mui/material";
+import Avatar from "../../components/Avatar";
+import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
+import ArticleIcon from "@mui/icons-material/Article";
+import QuizIcon from "@mui/icons-material/Quiz";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import { Avatar, Button } from "@mui/material";
-import { ColorModeContext } from "../../theme";
-import { useContext, useEffect, useState } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
-
-const drawerWidth = 250;
-
-const openedMixin = (theme) => ({
-  width: drawerWidth,
-  transition: theme.transitions.create("width", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.enteringScreen,
-  }),
-  overflowX: "hidden",
-});
-
-const closedMixin = (theme) => ({
-  transition: theme.transitions.create("width", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  overflowX: "hidden",
-  width: `calc(${theme.spacing(7)} + 1px)`,
-  [theme.breakpoints.up("sm")]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
-  },
-});
-
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-}));
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(["width", "margin"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
-
-const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  width: drawerWidth,
-  flexShrink: 0,
-  whiteSpace: "nowrap",
-  boxSizing: "border-box",
-  ...(open && {
-    ...openedMixin(theme),
-    "& .MuiDrawer-paper": openedMixin(theme),
-  }),
-  ...(!open && {
-    ...closedMixin(theme),
-    "& .MuiDrawer-paper": closedMixin(theme),
-  }),
-}));
+import { AppBar, Drawer, DrawerHeader } from "./utils";
+import ModeButton from "../../components/ModeButton";
 
 export default function Home() {
   const theme = useTheme();
@@ -101,8 +35,6 @@ export default function Home() {
       .addEventListener("change", (e) => setOpen(e.matches));
   }, []);
 
-  const { toggleColorMode } = useContext(ColorModeContext);
-
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -113,10 +45,26 @@ export default function Home() {
 
   const navigate = useNavigate();
 
-  const listItems = {};
+  const listItems = [
+    {
+      text: "Video qo'llanmalar",
+      to: "/",
+      icon: <OndemandVideoIcon />,
+    },
+    {
+      text: "Taqdimotlar",
+      to: "/presentations",
+      icon: <ArticleIcon />,
+    },
+    {
+      text: "Testlar",
+      to: "/tests",
+      icon: <QuizIcon />,
+    },
+  ];
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box display="flex">
       <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton
@@ -125,19 +73,20 @@ export default function Home() {
             onClick={handleDrawerOpen}
             edge="start"
             sx={{
-              marginRight: 5,
+              mr: 5,
               ...(open && { display: "none" }),
             }}
           >
             <MenuIcon />
           </IconButton>
-          <Button
-            onClick={toggleColorMode}
-            variant="contained"
-            sx={{ bgcolor: theme.palette.success.main }}
+          <Box
+            width={"100%"}
+            display={"flex"}
+            justifyContent={"flex-end"}
+            alignItems={"center"}
           >
-            toggle
-          </Button>
+            <ModeButton />
+          </Box>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -159,34 +108,32 @@ export default function Home() {
           justifyContent={"center"}
           alignItems={"center"}
           flexDirection="column"
-          gap={2}
           width="100%"
           p={2}
         >
-          <Avatar
-            sx={{
-              width: "100px",
-              height: "100px",
-              bgcolor: "primary.light",
-              "& img": {
-                transform: "translateY(4px)",
-              },
-            }}
-            src="/images/avatar.png"
-          />
+          <Avatar width={100} height={100} />
           <Typography
             variant="subtitle1"
             width={"100%"}
-            component="div"
             textAlign={"center"}
             noWrap
+            mt={2}
+            mb={0.5}
           >
-            Abdug'aniyev Nurmuhammad
+            Nurmuhammad
+          </Typography>
+          <Typography
+            variant="body1"
+            width={"100%"}
+            textAlign={"center"}
+            color={theme.palette.text.primary}
+          >
+            7-sinf
           </Typography>
         </Box>
         {open && <Divider />}
         <List>
-          {["Fanlar", "Taqdimotlar", "Testlar"].map((text, index) => (
+          {listItems.map(({ text, to, icon }) => (
             <ListItem key={text} disablePadding sx={{ display: "block" }}>
               <ListItemButton
                 sx={{
@@ -194,7 +141,7 @@ export default function Home() {
                   justifyContent: open ? "initial" : "center",
                   px: 2.5,
                 }}
-                onClick={() => navigate("/tests")}
+                onClick={() => navigate(to)}
               >
                 <ListItemIcon
                   sx={{
@@ -203,7 +150,7 @@ export default function Home() {
                     justifyContent: "center",
                   }}
                 >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {icon}
                 </ListItemIcon>
                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
@@ -217,35 +164,7 @@ export default function Home() {
         bgcolor="background.paper"
       >
         <DrawerHeader />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-          dolor purus non enim praesent elementum facilisis leo vel. Risus at
-          ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum
-          quisque non tellus. Convallis convallis tellus id interdum velit
-          laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed
-          adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-          integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate
-          eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo
-          quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-          vivamus at augue. At augue eget arcu dictum varius duis at consectetur
-          lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
-          faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-          ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-          elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse
-          sed nisi lacus sed viverra tellus. Purus sit amet volutpat consequat
-          mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis
-          risus sed vulputate odio. Morbi tincidunt ornare massa eget egestas
-          purus viverra accumsan in. In hendrerit gravida rutrum quisque non
-          tellus orci ac. Pellentesque nec nam aliquam sem et tortor. Habitant
-          morbi tristique senectus et. Adipiscing elit duis tristique
-          sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+        <Outlet />
       </Box>
     </Box>
   );

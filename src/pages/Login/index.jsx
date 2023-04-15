@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
   Alert,
-  Avatar,
   Box,
   Button,
   Grid,
@@ -11,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import Avatar from "../../components/Avatar";
 
 const Login = () => {
   const [open, setOpen] = useState(false);
@@ -54,17 +54,7 @@ const Login = () => {
           borderTopColor: "success.main",
         }}
       >
-        <Avatar
-          sx={{
-            width: "65px",
-            height: "65px",
-            bgcolor: "primary.light",
-            "& img": {
-              transform: "translateY(4px)",
-            },
-          }}
-          src="/images/avatar.png"
-        />
+        <Avatar width={65} height={65} />
         <Typography variant="h6" textAlign="center" my={3}>
           Axborot kommunikatsiya texnologiyalari yo'nalishidagi masofaviy ta'lim
           portali
@@ -108,7 +98,12 @@ const Login = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <Button type="submit" variant="contained" fullWidth onClick={() => navigate('/home')}>
+              <Button
+                type="submit"
+                variant="contained"
+                fullWidth
+                onClick={() => navigate("/")}
+              >
                 Kirish
               </Button>
             </Grid>
