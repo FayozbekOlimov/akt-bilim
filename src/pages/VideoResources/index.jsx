@@ -12,6 +12,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PlayArrowIcon from "@mui/icons-material/PlayArrowRounded";
 import { keyframes } from "@emotion/react";
+import shadows from "@mui/material/styles/shadows";
 
 const playAnimation = keyframes`
   0% {
@@ -39,6 +40,7 @@ const VideoResources = () => {
               textDecoration: "none",
               display: "block",
               borderRadius: 1,
+              boxShadow: shadows[5],
             }}
           >
             <CardActionArea>

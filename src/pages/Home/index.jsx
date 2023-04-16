@@ -57,8 +57,8 @@ export default function Home() {
       icon: <ArticleIcon />,
     },
     {
-      text: "Testlar",
-      to: "tests",
+      text: "Fanlar",
+      to: "subjects",
       icon: <QuizIcon />,
     },
   ];
