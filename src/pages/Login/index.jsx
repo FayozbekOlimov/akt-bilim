@@ -102,7 +102,7 @@ const Login = () => {
                 type="submit"
                 variant="contained"
                 fullWidth
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/dashboard")}
               >
                 Kirish
               </Button>

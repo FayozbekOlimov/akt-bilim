@@ -48,17 +48,17 @@ export default function Home() {
   const listItems = [
     {
       text: "Video qo'llanmalar",
-      to: "/",
+      to: "",
       icon: <OndemandVideoIcon />,
     },
     {
       text: "Taqdimotlar",
-      to: "/presentations",
+      to: "presentations",
       icon: <ArticleIcon />,
     },
     {
       text: "Testlar",
-      to: "/tests",
+      to: "tests",
       icon: <QuizIcon />,
     },
   ];

@@ -12,7 +12,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PlayArrowIcon from "@mui/icons-material/PlayArrowRounded";
 import { keyframes } from "@emotion/react";
-import { DateRange } from "@mui/icons-material";
 
 const playAnimation = keyframes`
   0% {
@@ -35,7 +34,7 @@ const VideoResources = () => {
         <Grid item xs={12} md={6} lg={4} key={index}>
           <Card
             component={Link}
-            to="/"
+            to={`videos/${index}`}
             sx={{
               textDecoration: "none",
               display: "block",
@@ -50,17 +49,7 @@ const VideoResources = () => {
                 alt="green iguana"
               />
               <Stack sx={{ position: "absolute", top: "4px", right: "4px" }}>
-                <Chip
-                  size="small"
-                  label={
-                    <Stack direction="row" alignItems={"center"} gap={0.5}>
-                      <Typography variant="body2" component={"span"}>
-                        04-15-2023
-                      </Typography>
-                    </Stack>
-                  }
-                  color="secondary"
-                />
+                <Chip size="small" label="04-15-2023" color="secondary" />
               </Stack>
               <PlayArrowIcon
                 sx={{
@@ -76,12 +65,12 @@ const VideoResources = () => {
                   animation: `${playAnimation} 1.2s ease-in-out infinite`,
                 }}
               />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Matematika
+              <CardContent p={2}>
+                <Typography variant="subtitle1" noWrap>
+                  Web dasturlashga kirish
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Natural sonlaring bo'linish alomatlari
+                  HTML Tutorial
                 </Typography>
               </CardContent>
             </CardActionArea>
