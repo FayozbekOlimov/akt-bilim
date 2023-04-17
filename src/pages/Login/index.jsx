@@ -1,27 +1,33 @@
-import { useState } from "react";
-import { Alert, Box, Button, Grid, Snackbar, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import * as Yup from "yup";
+import { Form, Formik } from "formik";
+import { login } from "../../redux/loginSlice";
 import Avatar from "../../components/Avatar";
+import { Button, Grid, Typography } from "@mui/material";
 import { LoginWrapper, MuiInput, StyledPaper } from "./styles";
 
 const Login = () => {
-  const [open, setOpen] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setOpen(true);
-  };
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  };
-
+  const dispatch = useDispatch();
+  const { status, error } = useSelector((state) => state.login);
   const navigate = useNavigate();
+
+  const initialValues = {
+    username: "",
+    password: "",
+  };
+
+  const validationSchema = Yup.object({
+    username: Yup.string().required("Username is required"),
+    password: Yup.string().required("Password is required"),
+  });
+
+  const onSubmit = async (values) => {
+    const res = await dispatch(login(values));
+    if (res.payload) {
+      navigate("/dashboard");
+    }
+  };
 
   return (
     <LoginWrapper>
@@ -31,49 +37,73 @@ const Login = () => {
           Axborot kommunikatsiya texnologiyalari yo'nalishidagi masofaviy ta'lim
           portali
         </Typography>
-        <Box component="form" onSubmit={handleSubmit}>
-          <Grid container gap={2}>
-            <Grid item xs={12}>
-              <MuiInput
-                label="Foydalanuvchi"
-                required
-                fullWidth
-                type="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <MuiInput
-                label="Parol"
-                required
-                fullWidth
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Button
-                type="submit"
-                variant="contained"
-                fullWidth
-                onClick={() => navigate("/dashboard")}
-              >
-                Kirish
-              </Button>
-            </Grid>
-            <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-              <Alert
-                onClose={handleClose}
-                severity="success"
-                sx={{ width: "100%" }}
-              >
-                Siz tizimga kirdingiz
-              </Alert>
-            </Snackbar>
-          </Grid>
-        </Box>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={onSubmit}
+        >
+          {(formik) => (
+            <Form>
+              <Grid container gap={2}>
+                <Grid item xs={12}>
+                  <MuiInput
+                    label="Foydalanuvchi nomi"
+                    fullWidth
+                    type="username"
+                    name="username"
+                    value={formik.values.username}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={
+                      formik.touched.username && Boolean(formik.errors.username)
+                    }
+                    helperText={
+                      formik.touched.username &&
+                      Boolean(formik.errors.username) &&
+                      "Foydalanuvchi nomi kiritilishi shart!"
+                    }
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <MuiInput
+                    label="Parol"
+                    fullWidth
+                    type="password"
+                    name="password"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={
+                      formik.touched.password && Boolean(formik.errors.password)
+                    }
+                    helperText={
+                      formik.touched.password &&
+                      Boolean(formik.errors.password) &&
+                      "Parol kiritilishi shart!"
+                    }
+                  />
+                </Grid>
+                {status === "failed" && (
+                  <Grid item xs={12}>
+                    <Typography color="error" component="body2" pl={1.5}>
+                      {error}
+                    </Typography>
+                  </Grid>
+                )}
+                <Grid item xs={12}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    fullWidth
+                    disabled={formik.isSubmitting}
+                  >
+                    Kirish
+                  </Button>
+                </Grid>
+              </Grid>
+            </Form>
+          )}
+        </Formik>
       </StyledPaper>
     </LoginWrapper>
   );
