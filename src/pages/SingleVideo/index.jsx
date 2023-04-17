@@ -1,25 +1,17 @@
 import { DateRange } from "@mui/icons-material";
 import { Box, Divider, Grid, Typography } from "@mui/material";
 import React from "react";
+import { Iframe } from "./styles";
 
 const SingleVideo = () => {
   return (
     <Grid container spacing={3}>
       <Grid item sm={12} lg={6}>
-        <iframe
-          style={{
-            width: "100%",
-            height: "100%",
-            borderRadius: "8px",
-            border: "none",
-            objectFit: "cover",
-            cursor: "pointer",
-            aspectRatio: 16 / 9,
-          }}
+        <Iframe
           src="https://youtube.com/embed/NyjWX5bD8Dg"
           poster="./img/video-title.png"
           allowFullScreen
-        ></iframe>
+        />
       </Grid>
       <Grid item sm={12} lg={6}>
         <Typography variant="h5">Web dasturlashga kirish</Typography>
@@ -30,8 +22,8 @@ const SingleVideo = () => {
           <Typography
             variant="body2"
             color="text.secondary"
-            component={"div"}
-            display={"flex"}
+            component="div"
+            display="flex"
             alignItems="center"
           >
             <DateRange sx={{ fontSize: "18px", mr: 0.5 }} />

@@ -1,7 +1,4 @@
-import { styled, theme } from "@mui/material/styles";
-import { AppBar as MuiAppBar, Box, Drawer as MuiDrawer } from "@mui/material";
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
+import { AppBar as MuiAppBar, Drawer as MuiDrawer, styled } from "@mui/material";
 
 const drawerWidth = 250;
 
@@ -39,10 +36,6 @@ export const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
-  // backgroundColor: theme.palette.primary.main,
-  // display: "flex",
-  // alignItems: "center",
-  // justifyContent: "flex-end",
   transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,

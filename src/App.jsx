@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { Navigate, Outlet, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Subjects from "./pages/Subjects";
 import VideoResources from "./pages/VideoResources";

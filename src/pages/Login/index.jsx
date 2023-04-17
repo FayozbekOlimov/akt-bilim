@@ -1,16 +1,8 @@
 import { useState } from "react";
-import {
-  Alert,
-  Box,
-  Button,
-  Grid,
-  Paper,
-  Snackbar,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Alert, Box, Button, Grid, Snackbar, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Avatar from "../../components/Avatar";
+import { LoginWrapper, MuiInput, StyledPaper } from "./styles";
 
 const Login = () => {
   const [open, setOpen] = useState(false);
@@ -32,28 +24,8 @@ const Login = () => {
   const navigate = useNavigate();
 
   return (
-    <Box
-      display={"flex"}
-      justifyContent={"center"}
-      alignItems={"center"}
-      height="100%"
-      p={2}
-    >
-      <Paper
-        elevation={4}
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          py: 3,
-          px: 2,
-          maxWidth: "400px",
-          margin: "0 auto",
-          bgcolor: "background.paper",
-          borderTop: "4px solid",
-          borderTopColor: "success.main",
-        }}
-      >
+    <LoginWrapper>
+      <StyledPaper elevation={4}>
         <Avatar width={65} height={65} />
         <Typography variant="h6" textAlign="center" my={3}>
           Axborot kommunikatsiya texnologiyalari yo'nalishidagi masofaviy ta'lim
@@ -62,39 +34,23 @@ const Login = () => {
         <Box component="form" onSubmit={handleSubmit}>
           <Grid container gap={2}>
             <Grid item xs={12}>
-              <TextField
+              <MuiInput
                 label="Foydalanuvchi"
                 required
                 fullWidth
                 type="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                sx={{
-                  "& input": {
-                    padding: "14.5px 12px",
-                  },
-                  "& label": {
-                    fontSize: "14px",
-                  },
-                }}
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <MuiInput
                 label="Parol"
                 required
                 fullWidth
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                sx={{
-                  "& input": {
-                    padding: "14.5px 12px",
-                  },
-                  "& label": {
-                    fontSize: "14px",
-                  },
-                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -118,8 +74,8 @@ const Login = () => {
             </Snackbar>
           </Grid>
         </Box>
-      </Paper>
-    </Box>
+      </StyledPaper>
+    </LoginWrapper>
   );
 };
 

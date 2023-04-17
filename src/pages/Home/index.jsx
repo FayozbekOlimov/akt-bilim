@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { useTheme } from "@mui/material/styles";
 import {
   ListItemText,
   ListItemIcon,
@@ -19,12 +18,10 @@ import ArticleIcon from "@mui/icons-material/Article";
 import QuizIcon from "@mui/icons-material/Quiz";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { AppBar, Drawer, DrawerHeader } from "./utils";
+import { AppBar, Drawer, DrawerHeader } from "./styles";
 import ModeButton from "../../components/ModeButton";
 
 export default function Home() {
-  const theme = useTheme();
   const [open, setOpen] = useState(
     window.matchMedia("(min-width: 768px)").matches
   );
@@ -80,10 +77,10 @@ export default function Home() {
             <MenuIcon />
           </IconButton>
           <Box
-            width={"100%"}
-            display={"flex"}
-            justifyContent={"flex-end"}
-            alignItems={"center"}
+            width="100%"
+            display="flex"
+            justifyContent="flex-end"
+            alignItems="center"
           >
             <ModeButton />
           </Box>
@@ -95,18 +92,14 @@ export default function Home() {
             Student
           </Typography>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
+            <ChevronLeftIcon />
           </IconButton>
         </DrawerHeader>
         {open && <Divider />}
         <Box
           display={open ? "flex" : "none"}
-          justifyContent={"center"}
-          alignItems={"center"}
+          justifyContent="center"
+          alignItems="center"
           flexDirection="column"
           width="100%"
           p={2}
@@ -114,8 +107,8 @@ export default function Home() {
           <Avatar width={100} height={100} />
           <Typography
             variant="subtitle1"
-            width={"100%"}
-            textAlign={"center"}
+            width="100%"
+            textAlign="center"
             noWrap
             mt={2}
             mb={0.5}
@@ -124,9 +117,9 @@ export default function Home() {
           </Typography>
           <Typography
             variant="body1"
-            width={"100%"}
-            textAlign={"center"}
-            color={theme.palette.text.primary}
+            width="100%"
+            textAlign="center"
+            color="text.primary"
           >
             7-sinf
           </Typography>
