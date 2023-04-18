@@ -32,7 +32,7 @@ export const PlayArrowIcon = styled(PlayArrowRounded)(({ theme }) => ({
   transform: "translateX(-50%)",
   width: "60px",
   height: "60px",
-  color: theme.palette.secondary.main,
+  color: theme.palette.primary.main,
   borderRadius: "50%",
   boxShadow: "0 0 0 rgba(0, 0, 0, 0.3)",
   animation: `${playAnimation} 1.2s ease-in-out infinite`,

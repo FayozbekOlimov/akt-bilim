@@ -21,8 +21,8 @@ const rows = [
 export default function CustomizedTables() {
   return (
     <TableContainer component={Paper}>
-      <Table aria-label="customized table">
-        <TableHead>
+      <Table>
+        <TableHead >
           <TableRow>
             <StyledTableCell sx={{ width: 60 }}>T/r</StyledTableCell>
             <StyledTableCell>Mavzu nomi</StyledTableCell>

@@ -1,12 +1,4 @@
-import {
-  Chip,
-  Divider,
-  Grid,
-  MenuItem,
-  MenuList,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Chip, Divider, Grid, MenuItem, MenuList } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
@@ -28,14 +20,14 @@ const Subjects = () => {
               title="Web dasturlashga kirish"
               component="h5"
               sx={{
-                bgcolor: "info.light",
+                bgcolor: "primary.dark",
                 color: "text.primary",
               }}
             />
             <Divider />
             <CardContent sx={{ padding: "8px 0 !important" }}>
               <MenuList disablePadding>
-                <MenuItem component={Link} to='/dashboard/resources'>
+                <MenuItem component={Link} to="/dashboard/resources">
                   <ListItemText>Resurslar soni</ListItemText>
                   <Chip
                     label="10"
@@ -45,8 +37,8 @@ const Subjects = () => {
                     sx={{ height: "20px" }}
                   />
                 </MenuItem>
-                <MenuItem component={Link} to='/dashboard/resources'>
-                  <ListItemText>Testlar</ListItemText>
+                <MenuItem component={Link} to="/dashboard/resources">
+                  <ListItemText>Testlar soni</ListItemText>
                   <Chip
                     label="5"
                     color="success"

@@ -85,7 +85,7 @@ const Login = () => {
                 </Grid>
                 {status === "failed" && (
                   <Grid item xs={12}>
-                    <Typography color="error" component="body2" pl={1.5}>
+                    <Typography color="error" variant="body2" pl={1.5}>
                       {error}
                     </Typography>
                   </Grid>

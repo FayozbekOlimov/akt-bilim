@@ -61,7 +61,14 @@ export default function Home() {
   ];
 
   return (
-    <Box display="flex">
+    <Box
+      display="flex"
+      sx={{
+        "& .MuiDrawer-paper": {
+          bgcolor: "background.sidebar",
+        },
+      }}
+    >
       <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton
@@ -153,8 +160,11 @@ export default function Home() {
       </Drawer>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 1 }}
-        bgcolor="background.paper"
+        flexGrow={1}
+        p={{
+          md: 3,
+          xs: 2,
+        }}
       >
         <DrawerHeader />
         <Outlet />

@@ -6,10 +6,14 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { CardWrapper, ChipWrapper, PlayArrowIcon } from "./styles";
 
 const VideoResources = () => {
+  const videos = useSelector((state) => state.videos);
+  console.log(videos);
+
   return (
     <Grid container spacing={2}>
       {Array.from(Array(6)).map((_, index) => (
@@ -23,7 +27,7 @@ const VideoResources = () => {
                 alt="green iguana"
               />
               <ChipWrapper>
-                <Chip size="small" label="04-15-2023" color="secondary" />
+                <Chip size="small" label="04-15-2023" color="primary" />
               </ChipWrapper>
               <PlayArrowIcon />
               <CardContent p={2}>

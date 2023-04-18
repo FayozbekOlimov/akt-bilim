@@ -1,5 +1,6 @@
 import { createContext, useState, useMemo } from "react";
 import { createTheme } from "@mui/material/styles";
+import { grey } from "@mui/material/colors";
 
 // mui theme settings
 export const themeSettings = (mode) => {
@@ -46,6 +47,7 @@ export const themeSettings = (mode) => {
             background: {
               paper: "#fff",
               default: "#fff",
+              sidebar: "#fff",
             },
           }
         : {
@@ -87,6 +89,7 @@ export const themeSettings = (mode) => {
             background: {
               paper: "#121212",
               default: "#121212",
+              sidebar: "#262626",
             },
           }),
     },

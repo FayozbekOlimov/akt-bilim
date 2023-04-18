@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { BASE_URL, loginUrl } from "../api";
-import { getCsrftoken } from "../helpers";
+// import { getCsrftoken } from "../helpers";
 
 const initialState = {
   user: null,
@@ -9,18 +9,19 @@ const initialState = {
   error: null,
 };
 
-const csrftoken = getCsrftoken();
+// const csrftoken = getCsrftoken();
 
 export const login = createAsyncThunk(
   "login",
   async ({ username, password }) => {
     try {
       const response = await axios.post(BASE_URL + loginUrl, {
-        csrfmiddlewaretoken: csrftoken,
+        // csrfmiddlewaretoken: csrftoken,
         username,
         password,
       });
-      localStorage.setItem("accessToken", response.data.access);
+      localStorage.setItem("accessToken", response?.data?.access);
+      localStorage.setItem("refreshToken", response?.data?.refresh);
       return response.data;
     } catch (error) {
       throw new Error("Noto'g'ri foydalanuvchi nomi yoki parol");

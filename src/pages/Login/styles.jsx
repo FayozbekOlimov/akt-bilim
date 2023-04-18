@@ -5,6 +5,7 @@ export const LoginWrapper = styled(Box)(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
   height: "100%",
+  padding: theme.spacing(2)
 }));
 
 export const StyledPaper = styled(Paper)(({ theme }) => ({
