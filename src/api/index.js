@@ -1,6 +1,10 @@
-export const BASE_URL = "http://najmiddin.pythonanywhere.com/api/";
+import axios from "axios";
+import { BASE_URL } from "./urls";
 
-export const loginUrl = "token/";
-export const refreshUrl = "token/refresh";
-
-export const videosUrl = "student-videos/";
+export const BASE_API = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    Authorization:
+      "Bearer " + JSON.parse(localStorage.getItem("tokens"))?.access,
+  },
+});

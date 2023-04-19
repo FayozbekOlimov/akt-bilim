@@ -1,7 +1,6 @@
-import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { BASE_URL, loginUrl } from "../api";
-// import { getCsrftoken } from "../helpers";
+import { loginUrl } from "../api/urls";
+import { BASE_API } from "../api";
 
 const initialState = {
   user: null,
@@ -9,22 +8,24 @@ const initialState = {
   error: null,
 };
 
-// const csrftoken = getCsrftoken();
-
 export const login = createAsyncThunk(
   "login",
   async ({ username, password }) => {
     try {
-      const response = await axios.post(BASE_URL + loginUrl, {
-        // csrfmiddlewaretoken: csrftoken,
+      const response = await BASE_API.post(loginUrl, {
         username,
         password,
       });
-      localStorage.setItem("accessToken", response?.data?.access);
-      localStorage.setItem("refreshToken", response?.data?.refresh);
+      localStorage.setItem("tokens", JSON.stringify(response.data));
       return response.data;
     } catch (error) {
-      throw new Error("Noto'g'ri foydalanuvchi nomi yoki parol");
+      if (error.code === "ERR_NETWORK") {
+        throw new Error("Internetga ulanishda xatolik");
+      } else if (error.response.status === 401) {
+        throw new Error("Noto'g'ri foydalanuvchi nomi yoki parol");
+      } else {
+        throw new Error(error.message);
+      }
     }
   }
 );

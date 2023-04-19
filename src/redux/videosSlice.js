@@ -1,15 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { BASE_URL, videosUrl } from "../api";
-
-const headers = {
-  "Content-Type": "application/json",
-  Authorization: "Bearer " + String(localStorage.getItem("accessToken")),
-};
+import { BASE_API } from "../api";
+import { videosUrl } from "../api/urls";
 
 export const fetchVideos = createAsyncThunk("videos/fetchVideos", async () => {
-  const response = await axios.get(BASE_URL + videosUrl, (headers = headers));
-  return response.data;
+  try {
+    const response = await BASE_API.get(videosUrl);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 });
 
 const initialState = {
