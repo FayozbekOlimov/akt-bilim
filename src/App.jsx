@@ -9,9 +9,8 @@ import Presentations from "./pages/Presentations";
 import { ColorModeContext, useMode } from "./theme";
 import SingleVideo from "./pages/SingleVideo";
 import Resources from "./pages/Resources";
-import { refreshUrl } from "./api/urls";
 import axios from "axios";
-import { BASE_URL } from "./api/urls";
+import { BASE_URL, refreshUrl } from "./api/urls";
 
 function App() {
   const [theme, colorMode] = useMode();
