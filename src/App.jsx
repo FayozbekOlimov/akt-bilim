@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
@@ -15,7 +15,7 @@ import { BASE_URL, refreshUrl } from "./api/urls";
 function App() {
   const [theme, colorMode] = useMode();
   const [tokens, setTokens] = useState(
-    JSON.parse(localStorage.getItem("tokens"))
+    JSON.parse(localStorage.getItem("tokens")) || null
   );
 
   useEffect(() => {
@@ -31,7 +31,7 @@ function App() {
         .catch((error) => {
           console.log(error.message);
         });
-    }, 4 * 60 * 1000);
+    }, 60 * 1000);
 
     return () => {
       clearInterval(intervalId);
@@ -39,25 +39,23 @@ function App() {
   }, [tokens]);
 
   return (
-    <Fragment>
-      <ColorModeContext.Provider value={colorMode}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Routes>
-            <Route path="/" element={<Navigate to="/login" replace={true} />} />
-            <Route path="login" element={<Login />} />
-            <Route path="/dashboard" element={<Home />}>
-              <Route index element={<VideoResources />} />
-              <Route path="presentations" element={<Presentations />} />
-              <Route path="subjects" element={<Subjects />} />
-              <Route path="videos/:id" element={<SingleVideo />} />
-              <Route path="resources" element={<Resources />} />
-            </Route>
-            <Route path="*" element={<h2>Sahifa topilmadi</h2>} />
-          </Routes>
-        </ThemeProvider>
-      </ColorModeContext.Provider>
-    </Fragment>
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" replace={true} />} />
+          <Route path="login" element={<Login />} />
+          <Route path="/dashboard" element={<Home />}>
+            <Route index element={<VideoResources />} />
+            <Route path="presentations" element={<Presentations />} />
+            <Route path="subjects" element={<Subjects />} />
+            <Route path="videos/:id" element={<SingleVideo />} />
+            <Route path="resources" element={<Resources />} />
+          </Route>
+          <Route path="*" element={<h2>Sahifa topilmadi</h2>} />
+        </Routes>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
   );
 }
 

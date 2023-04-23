@@ -1,5 +1,6 @@
 import {
   AppBar as MuiAppBar,
+  Box,
   Drawer as MuiDrawer,
   styled,
 } from "@mui/material";
@@ -70,4 +71,19 @@ export const Drawer = styled(MuiDrawer, {
     ...closedMixin(theme),
     "& .MuiDrawer-paper": closedMixin(theme),
   }),
+}));
+
+export const Main = styled(Box)(({ theme }) => ({
+  flexGrow: 1,
+  padding: theme.spacing(2),
+  [theme.breakpoints.up("md")]: {
+    padding: theme.spacing(3),
+  },
+}));
+
+export const HomeWrapper = styled(Box)(({ theme }) => ({
+  display: "flex",
+  "& .MuiDrawer-paper": {
+    backgroundColor: theme.palette.background.sidebar,
+  },
 }));

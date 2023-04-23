@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import {
   ListItemText,
@@ -18,8 +18,9 @@ import ArticleIcon from "@mui/icons-material/Article";
 import QuizIcon from "@mui/icons-material/Quiz";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { AppBar, Drawer, DrawerHeader } from "./styles";
+import { AppBar, Drawer, DrawerHeader, HomeWrapper, Main } from "./styles";
 import ModeButton from "../../components/ModeButton";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
 export default function Home() {
   const [open, setOpen] = useState(
@@ -42,6 +43,13 @@ export default function Home() {
 
   const navigate = useNavigate();
 
+  const handleClick = (text, to) => {
+    if (text === "Chiqish") {
+      localStorage.removeItem("tokens");
+    }
+    navigate(to);
+  };
+
   const listItems = [
     {
       text: "Video qo'llanmalar",
@@ -58,17 +66,15 @@ export default function Home() {
       to: "subjects",
       icon: <QuizIcon />,
     },
+    {
+      text: "Chiqish",
+      to: "/login",
+      icon: <LogoutOutlinedIcon />,
+    },
   ];
 
   return (
-    <Box
-      display="flex"
-      sx={{
-        "& .MuiDrawer-paper": {
-          bgcolor: "background.sidebar",
-        },
-      }}
-    >
+    <HomeWrapper>
       <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton
@@ -132,43 +138,46 @@ export default function Home() {
           </Typography>
         </Box>
         {open && <Divider />}
-        <List>
+        <List sx={{ py: 0 }}>
           {listItems.map(({ text, to, icon }) => (
-            <ListItem key={text} disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-                onClick={() => navigate(to)}
-              >
-                <ListItemIcon
+            <React.Fragment key={text}>
+              {text === "Chiqish" && <Divider />}
+              <ListItem disablePadding sx={{ display: "block", my: 0.5 }}>
+                <ListItemButton
                   sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5,
                   }}
+                  onClick={() => handleClick(text, to)}
                 >
-                  {icon}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : "auto",
+                      justifyContent: "center",
+                      color: text === "Chiqish" ? "error.main" : "auto",
+                    }}
+                  >
+                    {icon}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={text}
+                    sx={{
+                      opacity: open ? 1 : 0,
+                      color: text === "Chiqish" ? "error.main" : "auto",
+                    }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            </React.Fragment>
           ))}
         </List>
       </Drawer>
-      <Box
-        component="main"
-        flexGrow={1}
-        p={{
-          md: 3,
-          xs: 2,
-        }}
-      >
+      <Main>
         <DrawerHeader />
         <Outlet />
-      </Box>
-    </Box>
+      </Main>
+    </HomeWrapper>
   );
 }

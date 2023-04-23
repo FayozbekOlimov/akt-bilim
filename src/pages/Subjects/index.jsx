@@ -1,57 +1,43 @@
-import { Chip, Divider, Grid, MenuItem, MenuList } from "@mui/material";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardContent from "@mui/material/CardContent";
-import ListItemText from "@mui/material/ListItemText";
-import shadows from "@mui/material/styles/shadows";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Grid, Skeleton, Typography } from "@mui/material";
+import { fetchSubjects } from "../../redux/subjectsSlice";
+import SubjectCard from "./SubjectCard";
 
 const Subjects = () => {
+  const dispatch = useDispatch();
+  const { subjects, status, error } = useSelector((state) => state.subjects);
+
+  useEffect(() => {
+    dispatch(fetchSubjects());
+  }, [dispatch]);
+
+  if (status === "loading") {
+    return (
+      <Grid container spacing={2}>
+        {Array.from(new Array(3)).map((_, index) => (
+          <Grid item xs={12} md={6} lg={4} key={index}>
+            <Skeleton height={100} animation="wave" />
+            <Skeleton height={25} animation="wave" sx={{ mt: -1 }} />
+            <Skeleton height={25} animation="wave" sx={{ mt: -1 }} />
+          </Grid>
+        ))}
+      </Grid>
+    );
+  }
+
+  if (status === "failed") {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <Grid container spacing={2}>
-      {Array.from(Array(3)).map((_, index) => (
-        <Grid item xs={12} md={6} lg={4} key={index}>
-          <Card
-            sx={{
-              boxShadow: shadows[5],
-            }}
-          >
-            <CardHeader
-              title="Web dasturlashga kirish"
-              component="h5"
-              sx={{
-                bgcolor: "primary.dark",
-                color: "text.primary",
-              }}
-            />
-            <Divider />
-            <CardContent sx={{ padding: "8px 0 !important" }}>
-              <MenuList disablePadding>
-                <MenuItem component={Link} to="/dashboard/resources">
-                  <ListItemText>Resurslar soni</ListItemText>
-                  <Chip
-                    label="10"
-                    color="success"
-                    variant="filled"
-                    size="small"
-                    sx={{ height: "20px" }}
-                  />
-                </MenuItem>
-                <MenuItem component={Link} to="/dashboard/resources">
-                  <ListItemText>Testlar soni</ListItemText>
-                  <Chip
-                    label="5"
-                    color="success"
-                    variant="filled"
-                    size="small"
-                    sx={{ height: "20px" }}
-                  />
-                </MenuItem>
-              </MenuList>
-            </CardContent>
-          </Card>
-        </Grid>
-      ))}
+      {subjects &&
+        subjects.map((subject) => (
+          <Grid item xs={12} md={6} lg={4} key={subject.id}>
+            <SubjectCard {...subject} />
+          </Grid>
+        ))}
     </Grid>
   );
 };

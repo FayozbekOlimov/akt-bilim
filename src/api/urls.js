@@ -5,3 +5,4 @@ export const loginUrl = "token/";
 export const refreshUrl = "token/refresh/";
 
 export const videosUrl = "student-videos/";
+export const subjectsUrl = "sciences/";

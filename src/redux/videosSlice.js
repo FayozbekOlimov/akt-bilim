@@ -4,7 +4,13 @@ import { videosUrl } from "../api/urls";
 
 export const fetchVideos = createAsyncThunk("videos/fetchVideos", async () => {
   try {
-    const response = await BASE_API.get(videosUrl);
+    const response = await BASE_API.get(videosUrl, {
+      headers: {
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("tokens"))?.access
+        }`,
+      },
+    });
     return response.data;
   } catch (error) {
     throw new Error(error.message);
