@@ -21,8 +21,38 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { AppBar, Drawer, DrawerHeader, HomeWrapper, Main } from "./styles";
 import ModeButton from "../../components/ModeButton";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import { refreshUrl } from "../../api/urls";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/loginSlice";
+import { BASE_API } from "../../api";
 
 export default function Home() {
+  const [tokens, setTokens] = useState(
+    JSON.parse(localStorage.getItem("tokens")) || null
+  );
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      BASE_API.post(refreshUrl, {
+        refresh: tokens?.refresh,
+      })
+        .then((response) => {
+          setTokens(response.data);
+          localStorage.setItem("tokens", JSON.stringify(response.data));
+        })
+        .catch((error) => {
+          navigate("/login", { replace: true });
+          console.log(error.message);
+        });
+    }, 60 * 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [tokens]);
+
   const [open, setOpen] = useState(
     window.matchMedia("(min-width: 768px)").matches
   );
@@ -31,7 +61,7 @@ export default function Home() {
     window
       .matchMedia("(min-width: 768px)")
       .addEventListener("change", (e) => setOpen(e.matches));
-  }, []);
+  }, [open]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -41,11 +71,9 @@ export default function Home() {
     setOpen(false);
   };
 
-  const navigate = useNavigate();
-
   const handleClick = (text, to) => {
     if (text === "Chiqish") {
-      localStorage.removeItem("tokens");
+      dispatch(logout());
     }
     navigate(to);
   };

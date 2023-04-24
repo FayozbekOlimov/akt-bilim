@@ -1,6 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { BASE_API } from "../api";
 import { subjectsUrl } from "../api/urls";
+import { FAILED, IDLE, LOADING, SUCCEEDED } from "./actionTypes";
+
+const initialState = {
+  subjects: [],
+  status: IDLE,
+  error: null,
+}
 
 export const fetchSubjects = createAsyncThunk(
   "subjects/fetchSubjects",
@@ -22,23 +29,19 @@ export const fetchSubjects = createAsyncThunk(
 
 const subjectsSlice = createSlice({
   name: "subjects",
-  initialState: {
-    subjects: [],
-    status: "idle",
-    error: null,
-  },
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchSubjects.pending, (state) => {
-        state.status = "loading";
+        state.status = LOADING;
       })
       .addCase(fetchSubjects.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = SUCCEEDED;
         state.subjects = action.payload;
       })
       .addCase(fetchSubjects.rejected, (state, action) => {
-        state.status = "failed";
+        state.status = FAILED;
         state.error = action.error.message;
       });
   },

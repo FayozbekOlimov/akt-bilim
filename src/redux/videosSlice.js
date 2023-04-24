@@ -1,6 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { BASE_API } from "../api";
 import { videosUrl } from "../api/urls";
+import { FAILED, IDLE, LOADING, SUCCEEDED } from "./actionTypes";
+
+const initialState = {
+  videos: [],
+  status: IDLE,
+  error: null,
+};
 
 export const fetchVideos = createAsyncThunk("videos/fetchVideos", async () => {
   try {
@@ -17,12 +24,6 @@ export const fetchVideos = createAsyncThunk("videos/fetchVideos", async () => {
   }
 });
 
-const initialState = {
-  videos: [],
-  status: "idle",
-  error: null,
-};
-
 const videosSlice = createSlice({
   name: "videos",
   initialState,
@@ -30,14 +31,14 @@ const videosSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchVideos.pending, (state) => {
-        state.status = "loading";
+        state.status = LOADING;
       })
       .addCase(fetchVideos.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = SUCCEEDED;
         state.videos = action.payload;
       })
       .addCase(fetchVideos.rejected, (state, action) => {
-        state.status = "failed";
+        state.status = FAILED;
         state.error = action.error.message;
       });
   },

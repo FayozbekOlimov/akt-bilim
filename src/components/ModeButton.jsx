@@ -1,9 +1,9 @@
-import { useTheme } from "@mui/material/styles";
+import { useContext } from "react";
+import { useTheme } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
+import { ColorModeContext } from "../theme";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
-import { Box, IconButton } from "@mui/material";
-import { useContext, useMemo } from "react";
-import { ColorModeContext } from "../theme";
 
 const ModeButton = () => {
   const theme = useTheme();
