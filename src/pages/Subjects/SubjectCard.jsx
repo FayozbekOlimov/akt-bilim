@@ -7,7 +7,7 @@ import {
 import { Divider, ListItemText, MenuItem, MenuList } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const SubjectCard = ({ name }) => {
+const SubjectCard = ({ name, tests_count, recourse_count }) => {
   return (
     <CardWrapper>
       <CardTitle title={name} component="h5" />
@@ -17,7 +17,7 @@ const SubjectCard = ({ name }) => {
           <MenuItem component={Link} to="/dashboard/resources">
             <ListItemText>Resurslar soni</ListItemText>
             <StyledChip
-              label="10"
+              label={recourse_count}
               variant="filled"
               size="small"
               color="success"
@@ -26,7 +26,7 @@ const SubjectCard = ({ name }) => {
           <MenuItem component={Link} to="/dashboard/resources">
             <ListItemText>Testlar soni</ListItemText>
             <StyledChip
-              label="5"
+              label={tests_count}
               color="success"
               variant="filled"
               size="small"
