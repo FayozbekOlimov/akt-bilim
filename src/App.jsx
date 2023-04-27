@@ -7,6 +7,7 @@ import SingleVideo from "./pages/SingleVideo";
 import Resources from "./pages/Resources";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { Navigate, Route, Routes } from "react-router-dom";
+import UpdateProfile from "./pages/UpdateProfile";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="subjects" element={<Subjects />} />
         <Route path="videos/:id" element={<SingleVideo />} />
         <Route path="resources" element={<Resources />} />
+        <Route path="profile" element={<UpdateProfile />} />
       </Route>
       <Route path="*" element={<h2>Sahifa topilmadi</h2>} />
     </Routes>

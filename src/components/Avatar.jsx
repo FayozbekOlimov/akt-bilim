@@ -1,7 +1,7 @@
 import React from "react";
 import { Avatar as MuiAvatar } from "@mui/material";
 
-const Avatar = ({ width, height }) => {
+const Avatar = ({ width, height, src = "/images/avatar.png" }) => {
   return (
     <MuiAvatar
       sx={{
@@ -12,7 +12,7 @@ const Avatar = ({ width, height }) => {
           transform: "translateY(4px)",
         },
       }}
-      src="/images/avatar.png"
+      src={src}
     />
   );
 };

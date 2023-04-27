@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import {
   ListItemText,
   ListItemIcon,
@@ -18,6 +18,7 @@ import ArticleIcon from "@mui/icons-material/Article";
 import QuizIcon from "@mui/icons-material/Quiz";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { AppBar, Drawer, DrawerHeader, HomeWrapper, Main } from "./styles";
 import ModeButton from "../../components/ModeButton";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
@@ -124,6 +125,9 @@ export default function Home() {
             alignItems="center"
           >
             <ModeButton />
+            <IconButton color="inherit" LinkComponent={Link} to="/dashboard/profile">
+              <AccountCircleIcon />
+            </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
