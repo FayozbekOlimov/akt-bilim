@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Grid } from "@mui/material";
 import { fetchSubjects } from "../../redux/subjectsSlice";
 import { FAILED, LOADING } from "../../redux/actionTypes";
-import { SubjectsSkeleton } from "../../components/Skeleton";
+import { SubjectsSkeleton, VideosSkeleton } from "../../components/Skeleton";
 import SubjectCard from "./SubjectCard";
 
 const Subjects = () => {

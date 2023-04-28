@@ -3,6 +3,7 @@ import {
   Box,
   Drawer as MuiDrawer,
   styled,
+  Typography,
 } from "@mui/material";
 
 const drawerWidth = 250;
@@ -33,7 +34,6 @@ export const DrawerHeader = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "space-between",
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
 
@@ -41,7 +41,6 @@ export const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
-  // backgroundColor: theme.palette.warning.main,
   transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -86,4 +85,32 @@ export const HomeWrapper = styled(Box)(({ theme }) => ({
   "& .MuiDrawer-paper": {
     backgroundColor: theme.palette.background.sidebar,
   },
+}));
+
+export const Navbar = styled(Box)(({ theme }) => ({
+  width: "100%",
+  display: "flex",
+  justifyContent: "flex-end",
+  alignItems: "center",
+}));
+
+export const UserWrapper = styled(Box)(({ theme }) => ({
+  justifyContent: "flex-end",
+  alignItems: "center",
+  flexDirection: "column",
+  width: "100%",
+  padding: theme.spacing(2),
+}));
+
+export const UserName = styled(Typography)(({ theme }) => ({
+  width: "100%",
+  textAlign: "center",
+  marginTop: theme.spacing(2),
+  marginBottom: theme.spacing(0.5),
+}));
+
+export const UserGroup = styled(Typography)(({ theme }) => ({
+  width: "100%",
+  textAlign: "center",
+  color: theme.palette.text.primary,
 }));

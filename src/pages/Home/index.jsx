@@ -3,7 +3,6 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import {
   ListItemText,
   ListItemIcon,
-  Box,
   List,
   Toolbar,
   ListItemButton,
@@ -13,19 +12,26 @@ import {
   Divider,
 } from "@mui/material";
 import Avatar from "../../components/Avatar";
-import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
-import ArticleIcon from "@mui/icons-material/Article";
-import QuizIcon from "@mui/icons-material/Quiz";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { AppBar, Drawer, DrawerHeader, HomeWrapper, Main } from "./styles";
+import {
+  AppBar,
+  Drawer,
+  DrawerHeader,
+  HomeWrapper,
+  Main,
+  Navbar,
+  UserGroup,
+  UserName,
+  UserWrapper,
+} from "./styles";
 import ModeButton from "../../components/ModeButton";
-import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { refreshUrl } from "../../api/urls";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/loginSlice";
 import { BASE_API } from "../../api";
+import { listItems } from "./utils";
 
 export default function Home() {
   const [tokens, setTokens] = useState(
@@ -79,29 +85,6 @@ export default function Home() {
     navigate(to);
   };
 
-  const listItems = [
-    {
-      text: "Video qo'llanmalar",
-      to: "",
-      icon: <OndemandVideoIcon />,
-    },
-    {
-      text: "Taqdimotlar",
-      to: "presentations",
-      icon: <ArticleIcon />,
-    },
-    {
-      text: "Fanlar",
-      to: "subjects",
-      icon: <QuizIcon />,
-    },
-    {
-      text: "Chiqish",
-      to: "/login",
-      icon: <LogoutOutlinedIcon />,
-    },
-  ];
-
   return (
     <HomeWrapper>
       <AppBar position="fixed" open={open}>
@@ -118,17 +101,16 @@ export default function Home() {
           >
             <MenuIcon />
           </IconButton>
-          <Box
-            width="100%"
-            display="flex"
-            justifyContent="flex-end"
-            alignItems="center"
-          >
+          <Navbar>
             <ModeButton />
-            <IconButton color="inherit" LinkComponent={Link} to="/dashboard/profile">
+            <IconButton
+              color="inherit"
+              LinkComponent={Link}
+              to="/dashboard/profile"
+            >
               <AccountCircleIcon />
             </IconButton>
-          </Box>
+          </Navbar>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -141,34 +123,13 @@ export default function Home() {
           </IconButton>
         </DrawerHeader>
         {open && <Divider />}
-        <Box
-          display={open ? "flex" : "none"}
-          justifyContent="center"
-          alignItems="center"
-          flexDirection="column"
-          width="100%"
-          p={2}
-        >
+        <UserWrapper display={open ? "flex" : "none"}>
           <Avatar width={100} height={100} />
-          <Typography
-            variant="subtitle1"
-            width="100%"
-            textAlign="center"
-            noWrap
-            mt={2}
-            mb={0.5}
-          >
+          <UserName variant="subtitle1" noWrap>
             Nurmuhammad
-          </Typography>
-          <Typography
-            variant="body1"
-            width="100%"
-            textAlign="center"
-            color="text.primary"
-          >
-            7-sinf
-          </Typography>
-        </Box>
+          </UserName>
+          <UserGroup variant="body1">7-sinf</UserGroup>
+        </UserWrapper>
         {open && <Divider />}
         <List sx={{ py: 0 }}>
           {listItems.map(({ text, to, icon }) => (

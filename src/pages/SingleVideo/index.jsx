@@ -20,7 +20,7 @@ const SingleVideo = () => {
   }, [dispatch]);
 
   if (status === LOADING) {
-    return <div>Loading...</div>;
+    return <SingleVideoSkeleton />;
   }
 
   if (status === FAILED) {
