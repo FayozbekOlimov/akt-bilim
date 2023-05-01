@@ -11,7 +11,7 @@ export const listItems = [
   },
   {
     text: "Taqdimotlar",
-    to: "presentations",
+    to: "slides",
     icon: <ArticleIcon />,
   },
   {
