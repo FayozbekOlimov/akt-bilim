@@ -8,7 +8,12 @@ import {
 import { Link } from "react-router-dom";
 import { IMAGE_URL } from "../../api/urls";
 import { dateFormat } from "../../helpers";
-import { CardWrapper, ChipWrapper, PlayArrowIcon } from "./styles";
+import {
+  CardSubtitle,
+  CardWrapper,
+  ChipWrapper,
+  PlayArrowIcon,
+} from "./styles";
 
 const VideoCard = ({ id, image, name, date, science_name }) => {
   return (
@@ -28,9 +33,7 @@ const VideoCard = ({ id, image, name, date, science_name }) => {
           <Typography variant="subtitle1" noWrap gutterBottom>
             {science_name}
           </Typography>
-          <Typography variant="body2" color="text.secondary" noWrap>
-            {name}
-          </Typography>
+          <CardSubtitle variant="body2">{name}</CardSubtitle>
         </CardContent>
       </CardActionArea>
     </CardWrapper>

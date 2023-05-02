@@ -33,3 +33,8 @@ export const LoginTitle = styled(Typography)(({ theme }) => ({
   textAlign: "center",
   margin: `${theme.spacing(3)} 0`,
 }));
+
+export const ErrorMessage = styled(Typography)(({ theme }) => ({
+  color: theme.palette.error.main,
+  paddingLeft: theme.spacing(1.5),
+}));

@@ -32,6 +32,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../redux/loginSlice";
 import { BASE_API } from "../../api";
 import { listItems } from "./utils";
+import useMediaQuery from "../../hooks/useMediaQuery";
 
 export default function Home() {
   const [tokens, setTokens] = useState(
@@ -51,24 +52,16 @@ export default function Home() {
         })
         .catch((error) => {
           navigate("/login", { replace: true });
-          console.log(error.message);
+          // console.log(error.message);
         });
-    }, 60 * 1000);
+    }, 4 * 60 * 1000);
 
     return () => {
       clearInterval(intervalId);
     };
   }, [tokens]);
 
-  const [open, setOpen] = useState(
-    window.matchMedia("(min-width: 768px)").matches
-  );
-
-  useEffect(() => {
-    window
-      .matchMedia("(min-width: 768px)")
-      .addEventListener("change", (e) => setOpen(e.matches));
-  }, [open]);
+  const [open, setOpen] = useMediaQuery("(min-width: 768px)");
 
   const handleDrawerOpen = () => {
     setOpen(true);

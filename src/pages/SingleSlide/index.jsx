@@ -33,7 +33,9 @@ const SingleSlide = () => {
   return (
     <Box>
       <SlideHeader>
-        <SlideTheme variant="h6">{slide?.name}</SlideTheme>
+        <SlideTheme variant="h6" noWrap>
+          {slide?.name}
+        </SlideTheme>
         <SlideDateBox variant="body2">
           <DateIcon />
           {dateFormat(slide?.date)}

@@ -4,8 +4,14 @@ import * as Yup from "yup";
 import { Form, Formik } from "formik";
 import { login } from "../../redux/loginSlice";
 import Avatar from "../../components/Avatar";
-import { Button, Grid, Typography } from "@mui/material";
-import { LoginTitle, LoginWrapper, MuiInput, StyledPaper } from "./styles";
+import { Button, Grid } from "@mui/material";
+import {
+  ErrorMessage,
+  LoginTitle,
+  LoginWrapper,
+  MuiInput,
+  StyledPaper,
+} from "./styles";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -42,24 +48,29 @@ const Login = () => {
           validationSchema={validationSchema}
           onSubmit={onSubmit}
         >
-          {(formik) => (
+          {({
+            values,
+            handleBlur,
+            handleChange,
+            isSubmitting,
+            touched,
+            errors,
+          }) => (
             <Form>
-              <Grid container gap={2}>
+              <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <MuiInput
                     label="Foydalanuvchi nomi"
                     fullWidth
                     type="username"
                     name="username"
-                    value={formik.values.username}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    error={
-                      formik.touched.username && Boolean(formik.errors.username)
-                    }
+                    value={values.username}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={touched.username && Boolean(errors.username)}
                     helperText={
-                      formik.touched.username &&
-                      Boolean(formik.errors.username) &&
+                      touched.username &&
+                      Boolean(errors.username) &&
                       "Foydalanuvchi nomi kiritilishi shart!"
                     }
                   />
@@ -70,24 +81,20 @@ const Login = () => {
                     fullWidth
                     type="password"
                     name="password"
-                    value={formik.values.password}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    error={
-                      formik.touched.password && Boolean(formik.errors.password)
-                    }
+                    value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={touched.password && Boolean(errors.password)}
                     helperText={
-                      formik.touched.password &&
-                      Boolean(formik.errors.password) &&
+                      touched.password &&
+                      Boolean(errors.password) &&
                       "Parol kiritilishi shart!"
                     }
                   />
                 </Grid>
                 {status === "failed" && (
                   <Grid item xs={12}>
-                    <Typography color="error" variant="body2" pl={1.5}>
-                      {error}
-                    </Typography>
+                    <ErrorMessage variant="body2">{error}</ErrorMessage>
                   </Grid>
                 )}
                 <Grid item xs={12}>
@@ -95,7 +102,7 @@ const Login = () => {
                     type="submit"
                     variant="contained"
                     fullWidth
-                    disabled={formik.isSubmitting}
+                    disabled={isSubmitting}
                   >
                     Kirish
                   </Button>

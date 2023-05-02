@@ -84,3 +84,45 @@ export const SlidesSkeleton = ({ count = 3 }) => {
     </Grid>
   );
 };
+
+export const SingleSlideSkeleton = () => {
+  return (
+    <Grid container spacing={2}>
+      <Grid item xs={12} lg={6}>
+        <Skeleton
+          animation="wave"
+          variant="rounded"
+          sx={{
+            height: {
+              xs: 200,
+              sm: 280,
+            },
+          }}
+        />
+      </Grid>
+      <Grid item xs={12} lg={6}>
+        <Skeleton height={30} animation="wave" width="50%" sx={{ mt: -0.5 }} />
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+          gap={2}
+        >
+          <Skeleton height={30} animation="wave" width="70%" />
+          <Skeleton height={30} animation="wave" width="30%" />
+        </Box>
+        <Skeleton
+          animation="wave"
+          variant="rounded"
+          sx={{
+            height: {
+              xs: 135,
+              sm: 215,
+            },
+            mt: 1,
+          }}
+        />
+      </Grid>
+    </Grid>
+  );
+};

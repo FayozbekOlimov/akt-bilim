@@ -1,6 +1,6 @@
 import { keyframes } from "@emotion/react";
 import { PlayArrowRounded } from "@mui/icons-material";
-import { Card, Stack, styled } from "@mui/material";
+import { Card, Stack, styled, Typography } from "@mui/material";
 import shadows from "@mui/material/styles/shadows";
 
 const playAnimation = keyframes`
@@ -42,4 +42,12 @@ export const ChipWrapper = styled(Stack)(({ theme }) => ({
   position: "absolute",
   top: "4px",
   right: "4px",
+}));
+
+export const CardSubtitle = styled(Typography)(({ theme }) => ({
+  display: "-webkit-box",
+  overflow: "hidden",
+  WebkitBoxOrient: "vertical",
+  WebkitLineClamp: 1,
+  color: theme.palette.text.secondary,
 }));

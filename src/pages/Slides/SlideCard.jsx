@@ -7,7 +7,7 @@ import {
   CardMedia,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { CardWrapper, Text } from "./styles";
+import { CardTitle, CardWrapper, CardSubtitle } from "./styles";
 
 const SlideCard = ({ id, image, name, text, science }) => {
   return (
@@ -20,12 +20,12 @@ const SlideCard = ({ id, image, name, text, science }) => {
           alt="slide card img"
         />
         <CardContent>
-          <Typography variant="subtitle1" noWrap gutterBottom>
+          <CardTitle variant="subtitle1" gutterBottom>
             {name}
-          </Typography>
-          <Text variant="body2" color="text.secondary">
+          </CardTitle>
+          <CardSubtitle variant="body2" color="text.secondary">
             {text}
-          </Text>
+          </CardSubtitle>
         </CardContent>
       </CardActionArea>
       <CardActions sx={{ pt: 0 }}>
