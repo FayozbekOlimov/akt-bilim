@@ -7,35 +7,30 @@ import {
   CardMedia,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { CardWrapper } from "./styles";
+import { CardWrapper, Text } from "./styles";
 
-const SlideCard = () => {
+const SlideCard = ({ id, image, name, text, science }) => {
   return (
     <CardWrapper>
-      <CardActionArea LinkComponent={Link} to="1">
+      <CardActionArea component={Link} to={`${id}`}>
         <CardMedia
           component="img"
-          image="/images/subject.jpg"
-          alt="slide"
-          sx={{
-            objectFit: "cover",
-            width: "100%",
-            height: 180,
-          }}
+          height="180"
+          image={image}
+          alt="slide card img"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
+          <Typography variant="subtitle1" noWrap gutterBottom>
+            {name}
           </Typography>
-          <Typography variant="body2" color="text.secondary" noWrap>
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
+          <Text variant="body2" color="text.secondary">
+            {text}
+          </Text>
         </CardContent>
       </CardActionArea>
-      <CardActions>
+      <CardActions sx={{ pt: 0 }}>
         <Button size="small" color="primary">
-          Matematika
+          {science?.name}
         </Button>
       </CardActions>
     </CardWrapper>

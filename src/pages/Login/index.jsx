@@ -5,7 +5,7 @@ import { Form, Formik } from "formik";
 import { login } from "../../redux/loginSlice";
 import Avatar from "../../components/Avatar";
 import { Button, Grid, Typography } from "@mui/material";
-import { LoginWrapper, MuiInput, StyledPaper } from "./styles";
+import { LoginTitle, LoginWrapper, MuiInput, StyledPaper } from "./styles";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -33,10 +33,10 @@ const Login = () => {
     <LoginWrapper>
       <StyledPaper elevation={4}>
         <Avatar width={65} height={65} />
-        <Typography variant="h6" textAlign="center" my={3}>
+        <LoginTitle variant="h6">
           Axborot kommunikatsiya texnologiyalari yo'nalishidagi masofaviy ta'lim
           portali
-        </Typography>
+        </LoginTitle>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}

@@ -1,4 +1,10 @@
-import { CardActionArea, CardContent, CardMedia, Chip, Typography } from "@mui/material";
+import {
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Chip,
+  Typography,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import { IMAGE_URL } from "../../api/urls";
 import { dateFormat } from "../../helpers";
@@ -19,10 +25,10 @@ const VideoCard = ({ id, image, name, date, science_name }) => {
         </ChipWrapper>
         <PlayArrowIcon />
         <CardContent p={2}>
-          <Typography variant="subtitle1" noWrap>
+          <Typography variant="subtitle1" noWrap gutterBottom>
             {science_name}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" color="text.secondary" noWrap>
             {name}
           </Typography>
         </CardContent>

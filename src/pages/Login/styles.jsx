@@ -1,11 +1,11 @@
-import { Box, Paper, styled, TextField } from "@mui/material";
+import { Box, Paper, styled, TextField, Typography } from "@mui/material";
 
 export const LoginWrapper = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   height: "100%",
-  padding: theme.spacing(2)
+  padding: theme.spacing(2),
 }));
 
 export const StyledPaper = styled(Paper)(({ theme }) => ({
@@ -27,4 +27,9 @@ export const MuiInput = styled(TextField)(({ theme }) => ({
   "& label": {
     fontSize: "14px",
   },
+}));
+
+export const LoginTitle = styled(Typography)(({ theme }) => ({
+  textAlign: "center",
+  margin: `${theme.spacing(3)} 0`,
 }));

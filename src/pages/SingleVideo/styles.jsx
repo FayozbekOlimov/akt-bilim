@@ -1,4 +1,5 @@
-import { styled } from "@mui/material";
+import { DateRange } from "@mui/icons-material";
+import { Box, styled, Typography } from "@mui/material";
 
 export const Iframe = styled("iframe")(({ theme }) => ({
   width: "100%",
@@ -11,4 +12,31 @@ export const Iframe = styled("iframe")(({ theme }) => ({
   [theme.breakpoints.up("sm")]: {
     height: "280px",
   },
+}));
+
+export const VideoHeader = styled(Box)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+}));
+
+export const VideoTheme = styled(Typography)(({ theme }) => ({
+  color: theme.palette.text.secondary,
+  flex: 1,
+}));
+
+export const VideoText = styled(Typography)(({ theme }) => ({
+  color: theme.palette.text.primary,
+}));
+
+export const VideoDateBox = styled(Box)(({ theme }) => ({
+  fontSize: "14px",
+  marginRight: theme.spacing(0.5),
+  display: "flex",
+  alignItems: "center",
+}));
+
+export const DateIcon = styled(DateRange)(({ theme }) => ({
+  fontSize: "18px",
+  marginRight: theme.spacing(0.5),
 }));

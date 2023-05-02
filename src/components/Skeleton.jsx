@@ -6,7 +6,7 @@ export const SubjectsSkeleton = ({ count = 3 }) => {
       {Array.from(new Array(count)).map((_, index) => (
         <Grid item xs={12} md={6} lg={4} key={index}>
           <Skeleton animation="wave" variant="rounded" height={60} />
-          <Skeleton animation="wave" height={30} sx={{mt: 0.5}} />
+          <Skeleton animation="wave" height={30} sx={{ mt: 0.5 }} />
           <Skeleton animation="wave" height={30} />
         </Grid>
       ))}
@@ -66,6 +66,21 @@ export const SingleVideoSkeleton = () => {
           }}
         />
       </Grid>
+    </Grid>
+  );
+};
+
+export const SlidesSkeleton = ({ count = 3 }) => {
+  return (
+    <Grid container spacing={2}>
+      {Array.from(new Array(count)).map((_, index) => (
+        <Grid item xs={12} md={6} lg={4} key={index}>
+          <Skeleton animation="wave" variant="rounded" height={180} />
+          <Skeleton height={30} width="60%" animation="wave" sx={{ mt: 0.5 }} />
+          <Skeleton height={30} animation="wave" sx={{ mt: -0.5 }} />
+          <Skeleton height={25} width="30%" animation="wave" />
+        </Grid>
+      ))}
     </Grid>
   );
 };

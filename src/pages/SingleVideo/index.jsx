@@ -1,5 +1,4 @@
-import { DateRange } from "@mui/icons-material";
-import { Box, Divider, Grid, Typography } from "@mui/material";
+import { Divider, Grid, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -8,7 +7,14 @@ import { SingleVideoSkeleton } from "../../components/Skeleton";
 import { dateFormat, videoLinkFormat } from "../../helpers";
 import { FAILED, LOADING } from "../../redux/actionTypes";
 import { fetchVideoById } from "../../redux/singleVideoSlice";
-import { Iframe } from "./styles";
+import {
+  DateIcon,
+  Iframe,
+  VideoDateBox,
+  VideoHeader,
+  VideoText,
+  VideoTheme,
+} from "./styles";
 
 const SingleVideo = () => {
   const { id } = useParams();
@@ -38,25 +44,15 @@ const SingleVideo = () => {
       </Grid>
       <Grid item sm={12} lg={6}>
         <Typography variant="h5">{video?.science_name}</Typography>
-        <Box display="flex" justifyContent="space-between" alignItems="center">
-          <Typography variant="h6" color="text.secondary" flex={1}>
-            {video?.name}
-          </Typography>
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            component="div"
-            display="flex"
-            alignItems="center"
-          >
-            <DateRange sx={{ fontSize: "18px", mr: 0.5 }} />
+        <VideoHeader>
+          <VideoTheme variant="h6">{video?.name}</VideoTheme>
+          <VideoDateBox variant="body2">
+            <DateIcon />
             {dateFormat(video?.date)}
-          </Typography>
-        </Box>
+          </VideoDateBox>
+        </VideoHeader>
         <Divider sx={{ my: 1 }} />
-        <Typography variant="body1" color="text.primary">
-          {video?.text}
-        </Typography>
+        <VideoText variant="body1">{video?.text}</VideoText>
       </Grid>
     </Grid>
   );
