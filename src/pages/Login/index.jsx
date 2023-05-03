@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { Form, Formik } from "formik";
 import { login } from "../../redux/loginSlice";
 import Avatar from "../../components/Avatar";
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, useTheme } from "@mui/material";
 import {
   ErrorMessage,
   LoginTitle,
@@ -17,6 +17,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const { status, error } = useSelector((state) => state.login);
   const navigate = useNavigate();
+  const theme = useTheme();
 
   const initialValues = {
     username: "",
@@ -73,6 +74,13 @@ const Login = () => {
                       Boolean(errors.username) &&
                       "Foydalanuvchi nomi kiritilishi shart!"
                     }
+                    sx={{
+                      "& .MuiInputBase-input:-webkit-autofill": {
+                        "-webkit-box-shadow": `0 0 0 100px ${
+                          theme.palette.mode === "dark" ? "#272727" : "#fff"
+                        } inset`,
+                      },
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -90,6 +98,13 @@ const Login = () => {
                       Boolean(errors.password) &&
                       "Parol kiritilishi shart!"
                     }
+                    sx={{
+                      "& .MuiInputBase-input:-webkit-autofill": {
+                        "-webkit-box-shadow": `0 0 0 100px ${
+                          theme.palette.mode === "dark" ? "#272727" : "#fff"
+                        } inset`,
+                      },
+                    }}
                   />
                 </Grid>
                 {status === "failed" && (

@@ -2,6 +2,7 @@ import { Box, Divider } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { SingleSlideSkeleton } from "../../components/Skeleton";
 import { dateFormat } from "../../helpers";
 import { FAILED, LOADING } from "../../redux/actionTypes";
 import { fetchSlideById } from "../../redux/singleSlideSlice";
@@ -23,7 +24,7 @@ const SingleSlide = () => {
   }, [dispatch]);
 
   if (status === LOADING) {
-    return "Loading...";
+    return <SingleSlideSkeleton />;
   }
 
   if (status === FAILED) {
@@ -33,9 +34,7 @@ const SingleSlide = () => {
   return (
     <Box>
       <SlideHeader>
-        <SlideTheme variant="h6" noWrap>
-          {slide?.name}
-        </SlideTheme>
+        <SlideTheme variant="h6">{slide?.name}</SlideTheme>
         <SlideDateBox variant="body2">
           <DateIcon />
           {dateFormat(slide?.date)}

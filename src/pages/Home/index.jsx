@@ -33,6 +33,7 @@ import { logout } from "../../redux/loginSlice";
 import { BASE_API } from "../../api";
 import { listItems } from "./utils";
 import useMediaQuery from "../../hooks/useMediaQuery";
+import jwtDecode from "jwt-decode";
 
 export default function Home() {
   const [tokens, setTokens] = useState(
@@ -119,9 +120,11 @@ export default function Home() {
         <UserWrapper display={open ? "flex" : "none"}>
           <Avatar width={100} height={100} />
           <UserName variant="subtitle1" noWrap>
-            Nurmuhammad
+            {jwtDecode(tokens["access"])["first_name"]}
           </UserName>
-          <UserGroup variant="body1">7-sinf</UserGroup>
+          <UserGroup variant="body1">
+            {jwtDecode(tokens["access"])["group"]}
+          </UserGroup>
         </UserWrapper>
         {open && <Divider />}
         <List sx={{ py: 0 }}>

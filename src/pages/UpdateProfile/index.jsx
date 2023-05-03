@@ -1,125 +1,102 @@
-import { PhotoCamera } from "@mui/icons-material";
-import {
-  Button,
-  Grid,
-  IconButton,
-  Paper,
-  TextField,
-  useTheme,
-} from "@mui/material";
-import { Formik, Form, Field } from "formik";
-import * as Yup from "yup";
-import Avatar from "../../components/Avatar";
+import { Button, Grid, TextField, Typography } from "@mui/material";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { Formik, Form } from "formik";
+import { ProfileWrapper } from "./styles";
+import { MuiFileInput } from "mui-file-input";
+import { useState } from "react";
 
-// const validationSchema = Yup.object().shape({
-//   firstName: Yup.string().required("First name is required"),
-//   lastName: Yup.string().required("Last name is required"),
-//   location: Yup.string(),
-//   birthday: Yup.date(),
-//   phoneNumber: Yup.string(),
-// });
+const UpdateProfile = () => {
+  const [value, setValue] = useState(null);
 
-const UpdateProfile = ({
-  user = { firstName: "", lastName: "", image: "" },
-  onUpdate,
-}) => {
-  const theme = useTheme();
+  const handleChange = (newValue, info) => {
+    setValue(newValue);
+  };
   return (
-    <Paper
-      elevation={4}
-      sx={{
-        maxWidth: 600,
-        width: "100%",
-        p: 2,
-        m: 'auto'
-      }}
-    >
-      <Formik
-        initialValues={{
-          firstName: user.firstName,
-          lastName: user.lastName,
-          image: user.image,
-          location: user.location || "",
-          birthday: user.birthday || "",
-          phoneNumber: user.phoneNumber || "",
-        }}
-        // validationSchema={validationSchema}
-        onSubmit={(values) => {
-          onUpdate(values);
-        }}
-      >
-        {({ errors, touched, values, setFieldValue }) => (
-          <Form>
-            <Grid container alignItems="center" spacing={2}>
-              <Grid item xs={12} md={6}>
-                <Field
-                  as={TextField}
-                  id="firstName"
-                  name="firstName"
-                  label="Ism"
-                  variant="outlined"
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Field
-                  as={TextField}
-                  id="lastName"
-                  name="lastName"
-                  label="Familiya"
-                  variant="outlined"
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Field
-                  as={TextField}
-                  id="location"
-                  name="location"
-                  label="Manzil"
-                  variant="outlined"
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Field
-                  as={TextField}
-                  id="birthday"
-                  name="birthday"
-                  label="Tug'ilgan kun"
-                  type="date"
-                  variant="outlined"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Field
-                  as={TextField}
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  label="Telefon raqam"
-                  variant="outlined"
-                  fullWidth
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  fullWidth
-                >
-                  O'zgartirish
-                </Button>
-              </Grid>
+    <ProfileWrapper elevation={4}>
+      <Formik>
+        <Form>
+          <Grid container alignItems="center" spacing={2}>
+            <Grid item xs={12}>
+              <Typography variant="h5" my={0.5} textAlign="center">
+                Mening profilim
+              </Typography>
             </Grid>
-          </Form>
-        )}
+            <Grid item xs={12} md={6}>
+              <TextField
+                id="firstName"
+                name="firstName"
+                label="Ism"
+                variant="outlined"
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField
+                id="lastName"
+                name="lastName"
+                label="Familiya"
+                variant="outlined"
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                id="location"
+                name="location"
+                label="Manzil"
+                variant="outlined"
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={["DatePicker"]}>
+                  <DatePicker
+                    label="Tug'ilgan kun"
+                    sx={{ width: "100%", mt: -0.4 }}
+                  />
+                </DemoContainer>
+              </LocalizationProvider>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField
+                id="phoneNumber"
+                name="phoneNumber"
+                label="Telefon raqam"
+                variant="outlined"
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <MuiFileInput
+                placeholder="Profil uchun rasm"
+                value={value}
+                onChange={handleChange}
+                fullWidth
+                sx={{
+                  "& .MuiInputAdornment-positionEnd": {
+                    flex: 1,
+                    justifyContent: "flex-end",
+                  },
+                }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                fullWidth
+              >
+                O'zgartirish
+              </Button>
+            </Grid>
+          </Grid>
+        </Form>
       </Formik>
-    </Paper>
+    </ProfileWrapper>
   );
 };
 
