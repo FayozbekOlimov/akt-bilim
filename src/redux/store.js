@@ -5,6 +5,7 @@ import singleVideoReducer from "./singleVideoSlice";
 import subjectsReducer from "./subjectsSlice";
 import slidesReducer from "./slidesSlice";
 import singleSlideReducer from "./singleSlideSlice";
+import resourceReducer from "./resourceSlice";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     subjects: subjectsReducer,
     slides: slidesReducer,
     slide: singleSlideReducer,
+    resource: resourceReducer,
   },
 });
 

@@ -1,28 +1,47 @@
 import {
+  Link,
   Paper,
   Table,
   TableBody,
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from "@mui/material";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { FAILED, LOADING } from "../../redux/actionTypes";
+import { fetchResourceById } from "../../redux/resourceSlice";
 import { StyledTableCell, StyledTableRow } from "./styles";
+import { dateFormat } from "../../helpers";
+import { IMAGE_URL } from "../../api/urls";
 
-function createData(tr, text, date) {
-  return { tr, text, date };
-}
+const Resources = () => {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const { resource, status, error } = useSelector((state) => state.resource);
 
-const rows = [
-  createData(1, "HTML Tutorial", "05-16-2023"),
-  createData(2, "CSS Tutorial", "05-17-2023"),
-  createData(3, "JavaScript Tutorial", "05-18-2023"),
-];
+  useEffect(() => {
+    dispatch(fetchResourceById(id));
+  }, [dispatch]);
 
-export default function CustomizedTables() {
+  if (status === LOADING) {
+    return "Loading...";
+  }
+
+  if (status === FAILED) {
+    return <div>{error}</div>;
+  }
+
+  if (resource.length === 0) {
+    return <Typography variant="subtitle1">Resurslar mavjud emas</Typography>;
+  }
+
   return (
     <TableContainer component={Paper}>
       <Table>
-        <TableHead >
+        <TableHead>
           <TableRow>
             <StyledTableCell sx={{ width: 60 }}>T/r</StyledTableCell>
             <StyledTableCell>Mavzu nomi</StyledTableCell>
@@ -30,15 +49,27 @@ export default function CustomizedTables() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.tr}>
-              <StyledTableCell>{row.tr}</StyledTableCell>
-              <StyledTableCell>{row.text}</StyledTableCell>
-              <StyledTableCell>{row.date}</StyledTableCell>
-            </StyledTableRow>
-          ))}
+          {resource.length &&
+            resource.map((res, index) => (
+              <StyledTableRow key={res.id}>
+                <StyledTableCell>{index + 1}</StyledTableCell>
+                <StyledTableCell>
+                  <Link
+                    href={IMAGE_URL + res.file}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    underline="hover"
+                  >
+                    {res.name}
+                  </Link>
+                </StyledTableCell>
+                <StyledTableCell>{dateFormat(res.date)}</StyledTableCell>
+              </StyledTableRow>
+            ))}
         </TableBody>
       </Table>
     </TableContainer>
   );
-}
+};
+
+export default Resources;

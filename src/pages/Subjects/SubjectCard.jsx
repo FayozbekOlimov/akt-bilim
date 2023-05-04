@@ -7,14 +7,14 @@ import {
 import { Divider, ListItemText, MenuItem, MenuList } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const SubjectCard = ({ name, tests_count, recourse_count }) => {
+const SubjectCard = ({ id, name, tests_count, recourse_count }) => {
   return (
     <CardWrapper>
       <CardTitle title={name} component="h5" />
       <Divider />
       <CardContentWrapper>
         <MenuList disablePadding>
-          <MenuItem component={Link} to="/dashboard/resources">
+          <MenuItem component={Link} to={`/dashboard/resources/${id}`}>
             <ListItemText>Resurslar soni</ListItemText>
             <StyledChip
               label={recourse_count}
@@ -23,7 +23,7 @@ const SubjectCard = ({ name, tests_count, recourse_count }) => {
               color="success"
             />
           </MenuItem>
-          <MenuItem component={Link} to="/dashboard/resources">
+          <MenuItem component={Link} to={`/dashboard/tests/${id}`}>
             <ListItemText>Testlar soni</ListItemText>
             <StyledChip
               label={tests_count}

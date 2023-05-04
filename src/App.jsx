@@ -21,7 +21,7 @@ function App() {
         <Route path="slides/:id" element={<SingleSlide />} />
         <Route path="subjects" element={<Subjects />} />
         <Route path="videos/:id" element={<SingleVideo />} />
-        <Route path="resources" element={<Resources />} />
+        <Route path="resources/:id" element={<Resources />} />
         <Route path="profile" element={<UpdateProfile />} />
       </Route>
       <Route path="*" element={<h2>Sahifa topilmadi</h2>} />
