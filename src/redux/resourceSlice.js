@@ -11,13 +11,11 @@ const initialState = {
 
 export const fetchResourceById = createAsyncThunk(
   "resource/fetchResourceById",
-  async (id) => {
+  async ({ accessToken, id }) => {
     try {
       const response = await BASE_API.get(`${resourcesUrl}${id}/`, {
         headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("tokens"))?.access
-          }`,
+          Authorization: `Bearer ${accessToken}`,
         },
       });
       return response.data;

@@ -19,10 +19,11 @@ import {
 const SingleVideo = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const { access } = useSelector((state) => state.login?.user);
   const { video, status, error } = useSelector((state) => state.video);
 
   useEffect(() => {
-    dispatch(fetchVideoById(id));
+    dispatch(fetchVideoById({ accessToken: access, id }));
   }, [dispatch]);
 
   if (status === LOADING) {

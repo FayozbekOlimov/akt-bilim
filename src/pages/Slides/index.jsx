@@ -8,10 +8,11 @@ import SlideCard from "./SlideCard";
 
 const Slides = () => {
   const dispatch = useDispatch();
+  const { access } = useSelector((state) => state.login?.user);
   const { slides, status, error } = useSelector((state) => state.slides);
 
   useEffect(() => {
-    dispatch(fetchSlides());
+    dispatch(fetchSlides(access));
   }, [dispatch]);
 
   if (status === LOADING) {

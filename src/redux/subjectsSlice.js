@@ -7,17 +7,15 @@ const initialState = {
   subjects: [],
   status: IDLE,
   error: null,
-}
+};
 
 export const fetchSubjects = createAsyncThunk(
   "subjects/fetchSubjects",
-  async () => {
+  async (accessToken) => {
     try {
       const response = await BASE_API.get(subjectsUrl, {
         headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("tokens"))?.access
-          }`,
+          Authorization: `Bearer ${accessToken}`,
         },
       });
       return response.data;

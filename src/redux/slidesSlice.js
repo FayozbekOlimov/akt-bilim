@@ -9,20 +9,21 @@ const initialState = {
   error: null,
 };
 
-export const fetchSlides = createAsyncThunk("slides/fetchSlides", async () => {
-  try {
-    const response = await BASE_API.get(slidesUrl, {
-      headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("tokens"))?.access
-        }`,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    throw new Error(error.message);
+export const fetchSlides = createAsyncThunk(
+  "slides/fetchSlides",
+  async (acessToken) => {
+    try {
+      const response = await BASE_API.get(slidesUrl, {
+        headers: {
+          Authorization: `Bearer ${acessToken}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
-});
+);
 
 const slidesSlice = createSlice({
   name: "slides",

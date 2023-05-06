@@ -76,7 +76,7 @@ const Login = () => {
                     }
                     sx={{
                       "& .MuiInputBase-input:-webkit-autofill": {
-                        "-webkit-box-shadow": `0 0 0 100px ${
+                        WebkitBoxShadow: `0 0 0 100px ${
                           theme.palette.mode === "dark" ? "#272727" : "#fff"
                         } inset`,
                       },
@@ -100,7 +100,7 @@ const Login = () => {
                     }
                     sx={{
                       "& .MuiInputBase-input:-webkit-autofill": {
-                        "-webkit-box-shadow": `0 0 0 100px ${
+                        WebkitBoxShadow: `0 0 0 100px ${
                           theme.palette.mode === "dark" ? "#272727" : "#fff"
                         } inset`,
                       },

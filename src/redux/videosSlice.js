@@ -9,20 +9,21 @@ const initialState = {
   error: null,
 };
 
-export const fetchVideos = createAsyncThunk("videos/fetchVideos", async () => {
-  try {
-    const response = await BASE_API.get(videosUrl, {
-      headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("tokens"))?.access
-        }`,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    throw new Error(error.message);
+export const fetchVideos = createAsyncThunk(
+  "videos/fetchVideos",
+  async (accessToken) => {
+    try {
+      const response = await BASE_API.get(videosUrl, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
-});
+);
 
 const videosSlice = createSlice({
   name: "videos",

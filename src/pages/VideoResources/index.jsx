@@ -8,10 +8,11 @@ import VideoCard from "./VideoCard";
 
 const VideoResources = () => {
   const dispatch = useDispatch();
+  const { access } = useSelector((state) => state.login?.user);
   const { videos, status, error } = useSelector((state) => state.videos);
 
   useEffect(() => {
-    dispatch(fetchVideos());
+    dispatch(fetchVideos(access));
   }, [dispatch]);
 
   if (status === LOADING) {

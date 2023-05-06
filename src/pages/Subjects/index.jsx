@@ -8,10 +8,11 @@ import SubjectCard from "./SubjectCard";
 
 const Subjects = () => {
   const dispatch = useDispatch();
+  const { access } = useSelector((state) => state.login?.user);
   const { subjects, status, error } = useSelector((state) => state.subjects);
 
   useEffect(() => {
-    dispatch(fetchSubjects());
+    dispatch(fetchSubjects(access));
   }, [dispatch]);
 
   if (status === LOADING) {

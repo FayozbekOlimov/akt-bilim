@@ -16,3 +16,8 @@
 html, body, #root {
   font-family: 'Open Sans', 'sans-serif';
 }
+
+/* input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  -webkit-appearance: none;
+} */

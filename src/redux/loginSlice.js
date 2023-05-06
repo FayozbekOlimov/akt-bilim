@@ -18,7 +18,6 @@ export const login = createAsyncThunk(
         username,
         password,
       });
-      localStorage.setItem("tokens", JSON.stringify(response?.data));
       return response.data;
     } catch (error) {
       if (error.code === "ERR_NETWORK") {
@@ -36,10 +35,13 @@ const loginSlice = createSlice({
   name: "login",
   initialState,
   reducers: {
+    updateTokens(state, action) {
+      state.user = action.payload;
+    },
     logout(state) {
       state.isLoggedIn = false;
-      localStorage.removeItem("tokens");
       state.user = null;
+      state.status = IDLE;
     },
   },
   extraReducers: (builder) => {
@@ -60,5 +62,5 @@ const loginSlice = createSlice({
   },
 });
 
-export const { logout } = loginSlice.actions;
+export const { logout, updateTokens } = loginSlice.actions;
 export default loginSlice.reducer;

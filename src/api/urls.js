@@ -9,4 +9,4 @@ export const subjectsUrl = "sciences/";
 export const resourcesUrl = "recourses/";
 export const slidesUrl = "slides/";
 
-export const profilUrl = "update-student/";
+export const profileUrl = "update-student/";

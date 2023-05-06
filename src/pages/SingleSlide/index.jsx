@@ -17,10 +17,11 @@ import {
 const SingleSlide = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const { access } = useSelector((state) => state.login?.user);
   const { slide, status, error } = useSelector((state) => state.slide);
 
   useEffect(() => {
-    dispatch(fetchSlideById(id));
+    dispatch(fetchSlideById({ accessToken: access, id }));
   }, [dispatch]);
 
   if (status === LOADING) {

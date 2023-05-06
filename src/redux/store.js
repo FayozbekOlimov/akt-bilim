@@ -7,9 +7,19 @@ import slidesReducer from "./slidesSlice";
 import singleSlideReducer from "./singleSlideSlice";
 import resourceReducer from "./resourceSlice";
 
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, loginReducer);
+
 const store = configureStore({
   reducer: {
-    login: loginReducer,
+    login: persistedReducer,
     videos: videosReducer,
     video: singleVideoReducer,
     subjects: subjectsReducer,
@@ -17,6 +27,12 @@ const store = configureStore({
     slide: singleSlideReducer,
     resource: resourceReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
-export default store;
+const persistor = persistStore(store);
+
+export { store, persistor };

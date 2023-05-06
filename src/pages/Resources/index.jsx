@@ -20,10 +20,11 @@ import { IMAGE_URL } from "../../api/urls";
 const Resources = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const { access } = useSelector((state) => state.login?.user);
   const { resource, status, error } = useSelector((state) => state.resource);
 
   useEffect(() => {
-    dispatch(fetchResourceById(id));
+    dispatch(fetchResourceById({ accessToken: access, id }));
   }, [dispatch]);
 
   if (status === LOADING) {

@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import {
   ListItemText,
@@ -27,42 +26,23 @@ import {
   UserWrapper,
 } from "./styles";
 import ModeButton from "../../components/ModeButton";
-import { refreshUrl } from "../../api/urls";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/loginSlice";
-import { BASE_API } from "../../api";
 import { listItems } from "./utils";
+import { REFRESH_INTERVAL } from "../../constants";
+import { Fragment } from "react";
 import useMediaQuery from "../../hooks/useMediaQuery";
+import useRefreshToken from "../../hooks/useRefreshToken";
 import jwtDecode from "jwt-decode";
 
 export default function Home() {
-  const [tokens, setTokens] = useState(
-    JSON.parse(localStorage.getItem("tokens")) || null
-  );
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      BASE_API.post(refreshUrl, {
-        refresh: tokens?.refresh,
-      })
-        .then((response) => {
-          setTokens(response.data);
-          localStorage.setItem("tokens", JSON.stringify(response.data));
-        })
-        .catch((error) => {
-          navigate("/login", { replace: true });
-          // console.log(error.message);
-        });
-    }, 4 * 60 * 1000);
-
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [tokens]);
-
+  const { access } = useSelector((state) => state.login?.user);
+  const userData = jwtDecode(access);
   const [open, setOpen] = useMediaQuery("(min-width: 768px)");
+
+  useRefreshToken(REFRESH_INTERVAL);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -120,16 +100,14 @@ export default function Home() {
         <UserWrapper display={open ? "flex" : "none"}>
           <Avatar width={100} height={100} />
           <UserName variant="subtitle1" noWrap>
-            {jwtDecode(tokens["access"])["first_name"]}
+            {userData["first_name"]}
           </UserName>
-          <UserGroup variant="body1">
-            {jwtDecode(tokens["access"])["group"]}
-          </UserGroup>
+          <UserGroup variant="body1">{userData["group"]}</UserGroup>
         </UserWrapper>
         {open && <Divider />}
         <List sx={{ py: 0 }}>
           {listItems.map(({ text, to, icon }) => (
-            <React.Fragment key={text}>
+            <Fragment key={text}>
               {text === "Chiqish" && <Divider />}
               <ListItem disablePadding sx={{ display: "block", my: 0.5 }}>
                 <ListItemButton
@@ -159,7 +137,7 @@ export default function Home() {
                   />
                 </ListItemButton>
               </ListItem>
-            </React.Fragment>
+            </Fragment>
           ))}
         </List>
       </Drawer>
