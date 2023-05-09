@@ -10,3 +10,4 @@ export const resourcesUrl = "recourses/";
 export const slidesUrl = "slides/";
 
 export const profileUrl = "update-student/";
+export const userUrl = "students/";

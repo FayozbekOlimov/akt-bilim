@@ -1,4 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+
 import loginReducer from "./loginSlice";
 import videosReducer from "./videosSlice";
 import singleVideoReducer from "./singleVideoSlice";
@@ -6,9 +9,7 @@ import subjectsReducer from "./subjectsSlice";
 import slidesReducer from "./slidesSlice";
 import singleSlideReducer from "./singleSlideSlice";
 import resourceReducer from "./resourceSlice";
-
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import userReducer from "./userSlice";
 
 const persistConfig = {
   key: "root",
@@ -26,6 +27,7 @@ const store = configureStore({
     slides: slidesReducer,
     slide: singleSlideReducer,
     resource: resourceReducer,
+    user: userReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
