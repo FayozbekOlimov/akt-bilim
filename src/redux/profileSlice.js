@@ -5,18 +5,16 @@ import { FAILED, IDLE, LOADING, SUCCEEDED } from "./actionTypes";
 
 export const updateProfileData = createAsyncThunk(
   "profile/updateProfileData",
-  async ({ accessToken, userId, formData }, { rejectWithValue }) => {
-    console.log("async", accessToken, userId, formData);
+  async ({ accessToken, userId, formData }) => {
     try {
-      const response = await BASE_API.put(profileUrl + userId + "/", formData, {
+      const response = await BASE_API.put(`${profileUrl}${userId}/`, formData, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       });
       return response.data;
     } catch (error) {
-      console.log("reject", error.response.data);
-      return rejectWithValue(error.response.data);
+      throw new Error(error.message);
     }
   }
 );

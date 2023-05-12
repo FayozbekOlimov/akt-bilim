@@ -30,17 +30,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/loginSlice";
 import { listItems } from "./utils";
 import { REFRESH_INTERVAL } from "../../constants";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import useRefreshToken from "../../hooks/useRefreshToken";
 import jwtDecode from "jwt-decode";
+import { fetchUser } from "../../redux/userSlice";
 
 export default function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { access } = useSelector((state) => state.login?.user);
-  const userData = jwtDecode(access);
   const [open, setOpen] = useMediaQuery("(min-width: 768px)");
+
+  const { access } = useSelector((state) => state.login?.user);
+  const { user } = useSelector((state) => state.user);
+  const { student_id } = jwtDecode(access);
+
+  useEffect(() => {
+    dispatch(fetchUser({ accessToken: access, id: student_id }));
+  }, [dispatch, access, student_id]);
 
   useRefreshToken(REFRESH_INTERVAL);
 
@@ -100,9 +107,9 @@ export default function Home() {
         <UserWrapper display={open ? "flex" : "none"}>
           <Avatar width={100} height={100} />
           <UserName variant="subtitle1" noWrap>
-            {userData["first_name"]}
+            {user?.user?.first_name}
           </UserName>
-          <UserGroup variant="body1">{userData["group"]}</UserGroup>
+          <UserGroup variant="body1">{user?.user?.group}</UserGroup>
         </UserWrapper>
         {open && <Divider />}
         <List sx={{ py: 0 }}>
