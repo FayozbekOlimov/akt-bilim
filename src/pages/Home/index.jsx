@@ -1,15 +1,5 @@
-import { Link, Outlet, useNavigate } from "react-router-dom";
-import {
-  ListItemText,
-  ListItemIcon,
-  List,
-  Toolbar,
-  ListItemButton,
-  Typography,
-  ListItem,
-  IconButton,
-  Divider,
-} from "@mui/material";
+import { Link, Outlet } from "react-router-dom";
+import { List, Toolbar, Typography, IconButton, Divider } from "@mui/material";
 import Avatar from "../../components/Avatar";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -20,6 +10,7 @@ import {
   DrawerHeader,
   HomeWrapper,
   Main,
+  MuiIconButton,
   Navbar,
   UserGroup,
   UserName,
@@ -27,17 +18,15 @@ import {
 } from "./styles";
 import ModeButton from "../../components/ModeButton";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../redux/loginSlice";
-import { listItems } from "./utils";
-import { REFRESH_INTERVAL } from "../../constants";
-import { Fragment, useEffect, useState } from "react";
+import NavLink from "./NavLink";
+import { navLinks, REFRESH_INTERVAL } from "../../constants";
+import { useEffect } from "react";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import useRefreshToken from "../../hooks/useRefreshToken";
 import jwtDecode from "jwt-decode";
 import { fetchUser } from "../../redux/userSlice";
 
 export default function Home() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [open, setOpen] = useMediaQuery("(min-width: 768px)");
 
@@ -59,29 +48,18 @@ export default function Home() {
     setOpen(false);
   };
 
-  const handleClick = (text, to) => {
-    if (text === "Chiqish") {
-      dispatch(logout());
-    }
-    navigate(to);
-  };
-
   return (
     <HomeWrapper>
       <AppBar position="fixed" open={open}>
         <Toolbar>
-          <IconButton
-            color="inherit"
+          <MuiIconButton
             aria-label="open drawer"
-            onClick={handleDrawerOpen}
             edge="start"
-            sx={{
-              mr: 5,
-              ...(open && { display: "none" }),
-            }}
+            onClick={handleDrawerOpen}
+            open={open}
           >
             <MenuIcon />
-          </IconButton>
+          </MuiIconButton>
           <Navbar>
             <ModeButton />
             <IconButton
@@ -104,47 +82,17 @@ export default function Home() {
           </IconButton>
         </DrawerHeader>
         {open && <Divider />}
-        <UserWrapper display={open ? "flex" : "none"}>
+        <UserWrapper open={open}>
           <Avatar width={100} height={100} />
           <UserName variant="subtitle1" noWrap>
             {user?.user?.first_name}
           </UserName>
-          <UserGroup variant="body1">{user?.user?.group}</UserGroup>
+          <UserGroup variant="body1">{user?.group}</UserGroup>
         </UserWrapper>
         {open && <Divider />}
         <List sx={{ py: 0 }}>
-          {listItems.map(({ text, to, icon }) => (
-            <Fragment key={text}>
-              {text === "Chiqish" && <Divider />}
-              <ListItem disablePadding sx={{ display: "block", my: 0.5 }}>
-                <ListItemButton
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? "initial" : "center",
-                    px: 2.5,
-                  }}
-                  onClick={() => handleClick(text, to)}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : "auto",
-                      justifyContent: "center",
-                      color: text === "Chiqish" ? "error.main" : "auto",
-                    }}
-                  >
-                    {icon}
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={text}
-                    sx={{
-                      opacity: open ? 1 : 0,
-                      color: text === "Chiqish" ? "error.main" : "auto",
-                    }}
-                  />
-                </ListItemButton>
-              </ListItem>
-            </Fragment>
+          {navLinks.map((item) => (
+            <NavLink key={item.text} {...item} open={open} />
           ))}
         </List>
       </Drawer>

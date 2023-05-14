@@ -20,14 +20,14 @@ const SubjectCard = ({ id, name, tests_count, recourse_count }) => {
               label={recourse_count}
               variant="filled"
               size="small"
-              color="success"
+              color="primary"
             />
           </MenuItem>
           <MenuItem component={Link} to={`/dashboard/tests/${id}`}>
             <ListItemText>Testlar soni</ListItemText>
             <StyledChip
               label={tests_count}
-              color="success"
+              color="primary"
               variant="filled"
               size="small"
             />

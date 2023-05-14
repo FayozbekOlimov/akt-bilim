@@ -26,7 +26,7 @@ const VideoCard = ({ id, image, name, date, science_name }) => {
           alt={name}
         />
         <ChipWrapper>
-          <Chip size="small" label={dateFormat(date)} color="primary" />
+          <Chip size="small" label={dateFormat(date)} color="success" />
         </ChipWrapper>
         <PlayArrowIcon />
         <CardContent p={2}>

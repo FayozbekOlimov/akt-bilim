@@ -1,11 +1,11 @@
 import { DateRange } from "@mui/icons-material";
 import { Box, styled, Typography } from "@mui/material";
 
-export const SlideHeader = styled(Box)(({ theme }) => ({
+export const SlideHeader = styled(Box)({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-}));
+});
 
 export const SlideTheme = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.secondary,

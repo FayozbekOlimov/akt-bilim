@@ -2,6 +2,10 @@ import {
   AppBar as MuiAppBar,
   Box,
   Drawer as MuiDrawer,
+  IconButton,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
   styled,
   Typography,
 } from "@mui/material";
@@ -41,6 +45,7 @@ export const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
+  backgroundColor: theme.palette.success.dark,
   transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -53,6 +58,12 @@ export const AppBar = styled(MuiAppBar, {
       duration: theme.transitions.duration.enteringScreen,
     }),
   }),
+}));
+
+export const MuiIconButton = styled(IconButton)(({ theme, open }) => ({
+  display: open && "none",
+  color: "inherit",
+  marginRight: theme.spacing(5),
 }));
 
 export const Drawer = styled(MuiDrawer, {
@@ -87,14 +98,15 @@ export const HomeWrapper = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const Navbar = styled(Box)(({ theme }) => ({
+export const Navbar = styled(Box)({
   width: "100%",
   display: "flex",
   justifyContent: "flex-end",
   alignItems: "center",
-}));
+});
 
-export const UserWrapper = styled(Box)(({ theme }) => ({
+export const UserWrapper = styled(Box)(({ theme, open }) => ({
+  display: open ? "flex" : "none",
   justifyContent: "flex-end",
   alignItems: "center",
   flexDirection: "column",
@@ -113,4 +125,23 @@ export const UserGroup = styled(Typography)(({ theme }) => ({
   width: "100%",
   textAlign: "center",
   color: theme.palette.text.primary,
+}));
+
+export const MuiListItem = styled(ListItem)(({ theme }) => ({
+  display: "block",
+  margin: `${theme.spacing(0.5)} 0`,
+}));
+
+export const MuiListItemButton = styled(ListItemButton, {
+  shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+  minHeight: "48px",
+  justifyContent: open ? "initial" : "center",
+  padding: `0 ${theme.spacing(2.5)}`,
+}));
+
+export const MuiListItemIcon = styled(ListItemIcon)(({ theme, open }) => ({
+  minWidth: 0,
+  marginRight: open ? theme.spacing(2) : "auto",
+  justifyContent: "center",
 }));

@@ -2,8 +2,10 @@ import { styled, TableCell, tableCellClasses, TableRow } from "@mui/material";
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
+    backgroundColor: "#00CD97",
+    color: "#212121",
+    fontSize: 15,
+    fontWeight: 600,
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,

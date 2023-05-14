@@ -14,11 +14,11 @@ export const Iframe = styled("iframe")(({ theme }) => ({
   },
 }));
 
-export const VideoHeader = styled(Box)(({ theme }) => ({
+export const VideoHeader = styled(Box)({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-}));
+});
 
 export const VideoTheme = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.secondary,

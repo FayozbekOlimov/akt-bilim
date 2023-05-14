@@ -1,5 +1,4 @@
 import {
-  Typography,
   Button,
   CardActionArea,
   CardActions,
@@ -29,7 +28,7 @@ const SlideCard = ({ id, image, name, text, science }) => {
         </CardContent>
       </CardActionArea>
       <CardActions sx={{ pt: 0 }}>
-        <Button size="small" color="primary">
+        <Button size="small" color="success">
           {science?.name}
         </Button>
       </CardActions>

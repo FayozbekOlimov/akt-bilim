@@ -7,12 +7,13 @@ const Avatar = ({ width, height, src = "/images/avatar.png" }) => {
       sx={{
         width: `${width}px`,
         height: `${height}px`,
-        bgcolor: "primary.light",
+        bgcolor: "success.light",
         "& img": {
           transform: "translateY(4px)",
         },
       }}
       src={src}
+      alt="avatar img"
     />
   );
 };

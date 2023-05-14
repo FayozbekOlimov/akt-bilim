@@ -65,6 +65,7 @@ const Login = () => {
                     fullWidth
                     type="username"
                     name="username"
+                    color="success"
                     value={values.username}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -89,6 +90,7 @@ const Login = () => {
                     fullWidth
                     type="password"
                     name="password"
+                    color="success"
                     value={values.password}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -117,6 +119,7 @@ const Login = () => {
                     type="submit"
                     variant="contained"
                     fullWidth
+                    color="success"
                     disabled={isSubmitting}
                   >
                     Kirish

@@ -50,7 +50,7 @@ const Resources = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {resource.length &&
+          {resource?.length &&
             resource.map((res, index) => (
               <StyledTableRow key={res.id}>
                 <StyledTableCell>{index + 1}</StyledTableCell>
@@ -60,6 +60,7 @@ const Resources = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     underline="hover"
+                    color="text.primary"
                   >
                     {res.name}
                   </Link>

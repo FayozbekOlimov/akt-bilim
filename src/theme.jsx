@@ -46,7 +46,7 @@ export const themeSettings = (mode) => {
             background: {
               paper: "#fff",
               default: "#fff",
-              sidebar: "#fff",
+              sidebar: "#eee",
             },
           }
         : {

@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { ProfileWrapper } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../../redux/userSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { updateProfileData } from "../../redux/profileSlice";
 import jwtDecode from "jwt-decode";
 
@@ -14,6 +14,7 @@ const UpdateProfile = () => {
     user: state.user.user,
   }));
   const { student_id, user_id } = jwtDecode(access);
+  const [isChanged, setIsChanged] = useState(false);
 
   const initialValues = {
     first_name: "",
@@ -37,6 +38,23 @@ const UpdateProfile = () => {
       })
     );
     window.location.reload();
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (value !== user[name] || value !== user?.user[name]) {
+      setIsChanged(false);
+      formik.setFieldValue(name, value);
+    }
+
+    // if (
+    //   cloneOfValues[name] !== user[name] ||
+    //   cloneOfValues[name] !== user?.user[name]
+    // ) {
+    //   setIsChanged(true);
+    //   formik.setFieldValue(name, value);
+    // }
   };
 
   const formik = useFormik({
@@ -68,63 +86,62 @@ const UpdateProfile = () => {
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
-              id="firstName"
               name="first_name"
               label="Ism"
               variant="outlined"
+              color="success"
               fullWidth
               value={formik.values.first_name}
-              onChange={formik.handleChange}
+              onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
-              id="lastName"
               name="last_name"
               label="Familiya"
               variant="outlined"
+              color="success"
               fullWidth
               value={formik.values.last_name}
-              onChange={formik.handleChange}
+              onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
-              id="location"
               name="location"
               label="Manzil"
               variant="outlined"
+              color="success"
               fullWidth
               value={formik.values.location}
-              onChange={formik.handleChange}
+              onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
-              id="birthday"
               name="birth_day"
               label="Tug'ilgan kun"
               variant="outlined"
+              color="success"
               type="date"
               fullWidth
               value={formik.values.birth_day}
-              onChange={formik.handleChange}
+              onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
-              id="phoneNumber"
               name="phone"
               label="Telefon raqam"
               variant="outlined"
+              color="success"
               fullWidth
               value={formik.values.phone}
-              onChange={formik.handleChange}
+              onChange={handleChange}
             />
           </Grid>
           {/* <Grid item xs={12}>
             <TextField
-              id="image"
               name="image"
               variant="outlined"
               fullWidth
@@ -138,9 +155,9 @@ const UpdateProfile = () => {
             <Button
               type="submit"
               variant="contained"
-              color="primary"
+              color="success"
               fullWidth
-              disabled={formik.isSubmitting}
+              disabled={!isChanged}
             >
               O'zgartirish
             </Button>
