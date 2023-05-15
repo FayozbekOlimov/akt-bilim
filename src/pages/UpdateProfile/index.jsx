@@ -42,19 +42,13 @@ const UpdateProfile = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    formik.setFieldValue(name, value);
 
-    if (value !== user[name] || value !== user?.user[name]) {
-      setIsChanged(false);
-      formik.setFieldValue(name, value);
-    }
+    const isAnyFieldChanged = Object.keys(formik.initialValues).some(
+      (x) => user[x] === value || user?.user[x] === value
+    );
 
-    // if (
-    //   cloneOfValues[name] !== user[name] ||
-    //   cloneOfValues[name] !== user?.user[name]
-    // ) {
-    //   setIsChanged(true);
-    //   formik.setFieldValue(name, value);
-    // }
+    setIsChanged(!isAnyFieldChanged);
   };
 
   const formik = useFormik({

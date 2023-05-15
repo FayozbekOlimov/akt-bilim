@@ -9,6 +9,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { Navigate, Route, Routes } from "react-router-dom";
 import UpdateProfile from "./pages/UpdateProfile";
 import SingleSlide from "./pages/SingleSlide";
+import Tests from "./pages/Tests";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -22,9 +24,11 @@ function App() {
         <Route path="subjects" element={<Subjects />} />
         <Route path="videos/:id" element={<SingleVideo />} />
         <Route path="resources/:id" element={<Resources />} />
+        <Route path="tests/:id" element={<Tests />} />
         <Route path="profile" element={<UpdateProfile />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
-      <Route path="*" element={<h2>Sahifa topilmadi</h2>} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
