@@ -17,6 +17,7 @@ import {
   UserWrapper,
 } from "./styles";
 import ModeButton from "../../components/ModeButton";
+import TextToSpeechButton from "../../components/TextToSpeechButton";
 import { useDispatch, useSelector } from "react-redux";
 import NavLink from "./NavLink";
 import { navLinks, REFRESH_INTERVAL } from "../../constants";
@@ -61,6 +62,7 @@ export default function Home() {
             <MenuIcon />
           </MuiIconButton>
           <Navbar>
+            <TextToSpeechButton />
             <ModeButton />
             <IconButton
               color="inherit"
