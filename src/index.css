@@ -21,3 +21,16 @@ html, body, #root {
 input[type="date"]::-webkit-calendar-picker-indicator {
   -webkit-appearance: none;
 } */
+
+.special-light {
+  filter: grayscale(1);
+}
+.special-dark {
+  filter: grayscale(1) invert(1);
+}
+
+body.special-dark img,
+body.special-dark video,
+body.special-dark iframe {
+  filter: grayscale(0) invert(1);
+}

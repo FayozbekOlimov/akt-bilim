@@ -26,6 +26,7 @@ import useMediaQuery from "../../hooks/useMediaQuery";
 import useRefreshToken from "../../hooks/useRefreshToken";
 import jwtDecode from "jwt-decode";
 import { fetchUser } from "../../redux/userSlice";
+import VisibilityButton from "../../components/VisibilityButton";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -62,6 +63,7 @@ export default function Home() {
             <MenuIcon />
           </MuiIconButton>
           <Navbar>
+            <VisibilityButton></VisibilityButton>
             <TextToSpeechButton />
             <ModeButton />
             <IconButton

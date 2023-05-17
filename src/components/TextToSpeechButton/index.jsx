@@ -10,13 +10,12 @@ const TextToSpeechButton = () => {
     setOpen(false);
   };
 
-  const handleTooltipOpen = () => {
-    setOpen(true);
-  };
+  // const handleTooltipOpen = () => {
+  //   setOpen(true);
+  // };
 
   const [selectedText, setSelectedText] = useState("");
 
-  // Function to handle the text-to-speech functionality
   const speakText = () => {
     if (selectedText) {
       const utterance = new SpeechSynthesisUtterance(selectedText);
@@ -33,7 +32,6 @@ const TextToSpeechButton = () => {
     };
   }, []);
 
-  // Function to handle text selection and update the selectedText state
   const handleTextSelection = () => {
     const selectedText = window.getSelection().toString();
     setSelectedText(selectedText);
@@ -51,7 +49,7 @@ const TextToSpeechButton = () => {
           disableFocusListener
           disableHoverListener
           disableTouchListener
-          title="Voice"
+          title="voice"
         >
           <IconButton aria-label="voice" color="inherit" onClick={speakText}>
             <KeyboardVoice />

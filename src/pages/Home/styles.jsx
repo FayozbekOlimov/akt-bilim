@@ -64,6 +64,9 @@ export const MuiIconButton = styled(IconButton)(({ theme, open }) => ({
   display: open && "none",
   color: "inherit",
   marginRight: theme.spacing(5),
+  [theme.breakpoints.down("sm")]: {
+    marginLeft: "-8px",
+  },
 }));
 
 export const Drawer = styled(MuiDrawer, {
@@ -89,6 +92,8 @@ export const Main = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
     padding: theme.spacing(3),
   },
+  height: "100vh",
+  backgroundColor: theme.palette.background.default,
 }));
 
 export const HomeWrapper = styled(Box)(({ theme }) => ({
