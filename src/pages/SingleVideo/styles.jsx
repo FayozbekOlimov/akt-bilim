@@ -30,13 +30,13 @@ export const VideoText = styled(Typography)(({ theme }) => ({
 }));
 
 export const VideoDateBox = styled(Box)(({ theme }) => ({
-  fontSize: "14px",
+  fontSize: theme.typography.fontSize,
   marginRight: theme.spacing(0.5),
   display: "flex",
   alignItems: "center",
 }));
 
 export const DateIcon = styled(DateRange)(({ theme }) => ({
-  fontSize: "18px",
+  fontSize: theme.typography.fontSize + 4,
   marginRight: theme.spacing(0.5),
 }));

@@ -1,15 +1,16 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { ColorModeContext, useMode } from "../theme";
+import useMode, { ThemeContext } from "../hooks/useMode";
 
 const ThemeContextProvider = ({ children }) => {
-  const [theme, colorMode] = useMode();
+  const { theme, toggleColorMode, changeFontSize } = useMode();
+
   return (
-    <ColorModeContext.Provider value={colorMode}>
+    <ThemeContext.Provider value={{ toggleColorMode, changeFontSize }}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         {children}
       </ThemeProvider>
-    </ColorModeContext.Provider>
+    </ThemeContext.Provider>
   );
 };
 

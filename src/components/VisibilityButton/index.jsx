@@ -1,16 +1,16 @@
+import { useState } from "react";
 import { Visibility } from "@mui/icons-material";
 import {
   Box,
-  Button,
   ClickAwayListener,
   Divider,
   Grid,
   IconButton,
-  Slider,
   Tooltip,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { normalView, specialDarkView, specialLightView } from "../../helpers";
+import FontSizeSlider from "./FontSizeSlider";
 import { MuiButton } from "./styles";
 
 const VisibilityButton = () => {
@@ -24,27 +24,6 @@ const VisibilityButton = () => {
     setOpen(true);
   };
 
-  const normalView = () => {
-    document.body.classList.remove("special-dark");
-    document.body.classList.remove("special-light");
-  };
-
-  const specialLightView = () => {
-    document.body.classList.remove("special-dark");
-    document.body.classList.add("special-light");
-  };
-
-  const specialDarkView = () => {
-    document.body.classList.remove("special-light");
-    document.body.classList.add("special-dark");
-  };
-
-  const [value, setValue] = useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
   const TooltipActions = () => {
     return (
       <Box p={0.5}>
@@ -52,13 +31,13 @@ const VisibilityButton = () => {
         <Divider color="inherit" />
         <Grid container spacing={1} my={1}>
           <Grid item>
-            <MuiButton color="info" variant="contained" onClick={normalView}>
+            <MuiButton title="Normal" variant="contained" onClick={normalView}>
               A
             </MuiButton>
           </Grid>
           <Grid item>
             <MuiButton
-              color="info"
+              title="Oq-qora"
               variant="contained"
               onClick={specialLightView}
             >
@@ -67,7 +46,7 @@ const VisibilityButton = () => {
           </Grid>
           <Grid item>
             <MuiButton
-              color="info"
+              title="Qora-oq"
               variant="contained"
               onClick={specialDarkView}
             >
@@ -77,19 +56,7 @@ const VisibilityButton = () => {
         </Grid>
         <Typography variant="subtitle1">Shrift o'lchami</Typography>
         <Divider color="inherit" />
-        <Box mt={1}>
-          <Typography variant="subtitle2">
-            {value} % ga kattalashtirish
-          </Typography>
-          <Slider
-            aria-label="slider"
-            min={0}
-            max={100}
-            value={value}
-            color="primary"
-            onChange={handleChange}
-          />
-        </Box>
+        <FontSizeSlider />
       </Box>
     );
   };
@@ -110,7 +77,7 @@ const VisibilityButton = () => {
           arrow
         >
           <IconButton onClick={handleTooltipOpen} color="inherit">
-            <Visibility />
+            <Visibility sx={{ fontSize: "24px" }} />
           </IconButton>
         </Tooltip>
       </div>

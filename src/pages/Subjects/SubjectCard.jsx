@@ -4,7 +4,13 @@ import {
   CardWrapper,
   StyledChip,
 } from "./styles";
-import { Divider, ListItemText, MenuItem, MenuList } from "@mui/material";
+import {
+  Divider,
+  ListItemText,
+  MenuItem,
+  MenuList,
+  Typography,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 
 const SubjectCard = ({ id, name, tests_count, recourse_count }) => {
@@ -17,7 +23,7 @@ const SubjectCard = ({ id, name, tests_count, recourse_count }) => {
           <MenuItem component={Link} to={`/dashboard/resources/${id}`}>
             <ListItemText>Resurslar soni</ListItemText>
             <StyledChip
-              label={recourse_count}
+              label={<Typography variant="body2">{recourse_count}</Typography>}
               variant="filled"
               size="small"
               color="primary"
@@ -26,7 +32,7 @@ const SubjectCard = ({ id, name, tests_count, recourse_count }) => {
           <MenuItem component={Link} to={`/dashboard/tests/${id}`}>
             <ListItemText>Testlar soni</ListItemText>
             <StyledChip
-              label={tests_count}
+              label={<Typography variant="body2">{tests_count}</Typography>}
               color="primary"
               variant="filled"
               size="small"

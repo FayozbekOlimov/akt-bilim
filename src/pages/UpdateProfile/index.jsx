@@ -1,4 +1,11 @@
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  TextField,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { useFormik } from "formik";
 import { ProfileWrapper } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +15,7 @@ import { updateProfileData } from "../../redux/profileSlice";
 import jwtDecode from "jwt-decode";
 
 const UpdateProfile = () => {
+  const theme = useTheme();
   const dispatch = useDispatch();
   const { access, user } = useSelector((state) => ({
     access: state.login?.user.access,
@@ -152,6 +160,7 @@ const UpdateProfile = () => {
               color="success"
               fullWidth
               disabled={!isChanged}
+              sx={{ fontSize: theme.typography.fontSize }}
             >
               O'zgartirish
             </Button>

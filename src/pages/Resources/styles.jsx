@@ -4,11 +4,11 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "#00CD97",
     color: "#212121",
-    fontSize: 15,
+    fontSize: theme.typography.fontSize + 1,
     fontWeight: 600,
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
+    fontSize: theme.typography.fontSize,
   },
 }));
 

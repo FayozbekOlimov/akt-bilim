@@ -75,13 +75,6 @@ const Login = () => {
                       Boolean(errors.username) &&
                       "Foydalanuvchi nomi kiritilishi shart!"
                     }
-                    sx={{
-                      "& .MuiInputBase-input:-webkit-autofill": {
-                        WebkitBoxShadow: `0 0 0 100px ${
-                          theme.palette.mode === "dark" ? "#272727" : "#fff"
-                        } inset`,
-                      },
-                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -100,13 +93,6 @@ const Login = () => {
                       Boolean(errors.password) &&
                       "Parol kiritilishi shart!"
                     }
-                    sx={{
-                      "& .MuiInputBase-input:-webkit-autofill": {
-                        WebkitBoxShadow: `0 0 0 100px ${
-                          theme.palette.mode === "dark" ? "#272727" : "#fff"
-                        } inset`,
-                      },
-                    }}
                   />
                 </Grid>
                 {status === "failed" && (
@@ -121,6 +107,7 @@ const Login = () => {
                     fullWidth
                     color="success"
                     disabled={isSubmitting}
+                    sx={{ fontSize: theme.typography.fontSize }}
                   >
                     Kirish
                   </Button>

@@ -1,8 +1,5 @@
-import { createContext, useState, useMemo, useEffect } from "react";
-import { createTheme } from "@mui/material/styles";
-
 // mui theme settings
-export const themeSettings = (mode) => {
+export const themeSettings = (mode, fontSize) => {
   return {
     palette: {
       mode: mode,
@@ -94,73 +91,73 @@ export const themeSettings = (mode) => {
     },
     typography: {
       fontFamily: ["Open Sans", "sans-serif"].join(","),
-      fontSize: 14,
+      fontSize: fontSize,
       h1: {
         fontFamily: ["Open Sans", "sans-serif"].join(","),
-        fontSize: 40,
+        fontSize: fontSize * 3,
         fontWeight: 300,
         "@media (max-width: 768px)": {
-          fontSize: 36,
+          fontSize: fontSize * 2.8,
         },
       },
       h2: {
         fontFamily: ["Open Sans", "sans-serif"].join(","),
-        fontSize: 32,
+        fontSize: fontSize * 2.3,
         fontWeight: 300,
         "@media (max-width: 768px)": {
-          fontSize: 28,
+          fontSize: fontSize * 2,
         },
       },
       h3: {
         fontFamily: ["Open Sans", "sans-serif"].join(","),
-        fontSize: 28,
+        fontSize: fontSize * 2,
         fontWeight: 400,
         "@media (max-width: 768px)": {
-          fontSize: 24,
+          fontSize: fontSize * 1.75,
         },
       },
       h4: {
         fontFamily: ["Open Sans", "sans-serif"].join(","),
-        fontSize: 24,
+        fontSize: fontSize * 1.75,
         fontWeight: 400,
         "@media (max-width: 768px)": {
-          fontSize: 20,
+          fontSize: fontSize * 1.45,
         },
       },
       h5: {
         fontFamily: ["Open Sans", "sans-serif"].join(","),
-        fontSize: 20,
+        fontSize: fontSize * 1.45,
         fontWeight: 500,
         "@media (max-width: 768px)": {
-          fontSize: 18,
+          fontSize: fontSize * 1.3,
         },
       },
       h6: {
         fontFamily: ["Open Sans", "sans-serif"].join(","),
-        fontSize: 18,
+        fontSize: fontSize * 1.3,
         fontWeight: 500,
         "@media (max-width: 768px)": {
-          fontSize: 16,
+          fontSize: fontSize * 1.15,
         },
       },
       subtitle1: {
         lineHeight: 1.75,
-        fontSize: 16,
+        fontSize: fontSize * 1.15,
         fontWeight: 500,
       },
       subtitle2: {
         lineHeight: 1.5,
-        fontSize: 15,
+        fontSize: fontSize * 1.1,
         fontWeight: 500,
       },
       body1: {
         lineHeight: 1.4,
-        fontSize: 15,
+        fontSize: fontSize * 1.1,
         fontWeight: 400,
       },
       body2: {
         lineHeight: 1.2,
-        fontSize: 14,
+        fontSize: fontSize,
         fontWeight: 400,
       },
     },
@@ -174,31 +171,4 @@ export const themeSettings = (mode) => {
       },
     },
   };
-};
-
-// context for color mode
-export const ColorModeContext = createContext({
-  toggleColorMode: () => {},
-});
-
-export const useMode = () => {
-  const [mode, setMode] = useState(
-    () => localStorage.getItem("mode") || "light"
-  );
-
-  useEffect(() => {
-    localStorage.setItem("mode", mode);
-  }, [mode]);
-
-  const colorMode = useMemo(
-    () => ({
-      toggleColorMode: () =>
-        setMode((prev) => (prev === "light" ? "dark" : "light")),
-    }),
-    []
-  );
-
-  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
-
-  return [theme, colorMode];
 };

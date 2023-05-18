@@ -27,6 +27,11 @@ export const MuiInput = styled(TextField)(({ theme }) => ({
   "& label": {
     fontSize: "14px",
   },
+  "& .MuiInputBase-input:-webkit-autofill": {
+    WebkitBoxShadow: `0 0 0 100px ${
+      theme.palette.mode === "dark" ? "#272727" : "#fff"
+    } inset`,
+  },
 }));
 
 export const LoginTitle = styled(Typography)(({ theme }) => ({

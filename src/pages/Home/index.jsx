@@ -1,9 +1,9 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import jwtDecode from "jwt-decode";
 import { Link, Outlet } from "react-router-dom";
 import { List, Toolbar, Typography, IconButton, Divider } from "@mui/material";
-import Avatar from "../../components/Avatar";
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { Menu, ChevronLeft, AccountCircle } from "@mui/icons-material";
 import {
   AppBar,
   Drawer,
@@ -16,17 +16,16 @@ import {
   UserName,
   UserWrapper,
 } from "./styles";
+import Avatar from "../../components/Avatar";
 import ModeButton from "../../components/ModeButton";
 import TextToSpeechButton from "../../components/TextToSpeechButton";
-import { useDispatch, useSelector } from "react-redux";
+import VisibilityButton from "../../components/VisibilityButton";
 import NavLink from "./NavLink";
-import { navLinks, REFRESH_INTERVAL } from "../../constants";
-import { useEffect } from "react";
+import { REFRESH_INTERVAL } from "../../constants";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import useRefreshToken from "../../hooks/useRefreshToken";
-import jwtDecode from "jwt-decode";
 import { fetchUser } from "../../redux/userSlice";
-import VisibilityButton from "../../components/VisibilityButton";
+import { navLinks } from "./navLinks";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -60,7 +59,7 @@ export default function Home() {
             onClick={handleDrawerOpen}
             open={open}
           >
-            <MenuIcon />
+            <Menu sx={{ fontSize: "24px" }} />
           </MuiIconButton>
           <Navbar>
             <VisibilityButton></VisibilityButton>
@@ -71,7 +70,7 @@ export default function Home() {
               LinkComponent={Link}
               to="/dashboard/profile"
             >
-              <AccountCircleIcon />
+              <AccountCircle sx={{ fontSize: "24px" }} />
             </IconButton>
           </Navbar>
         </Toolbar>
@@ -82,7 +81,7 @@ export default function Home() {
             Student
           </Typography>
           <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
+            <ChevronLeft sx={{ fontSize: "24px" }} />
           </IconButton>
         </DrawerHeader>
         {open && <Divider />}

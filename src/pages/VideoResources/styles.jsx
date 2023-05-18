@@ -42,6 +42,10 @@ export const ChipWrapper = styled(Stack)(({ theme }) => ({
   position: "absolute",
   top: "4px",
   right: "4px",
+  "& .MuiChip-label": {
+    // fontSize: "14px",
+    fontWeight: 500,
+  },
 }));
 
 export const CardSubtitle = styled(Typography)(({ theme }) => ({

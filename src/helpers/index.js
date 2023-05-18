@@ -12,3 +12,18 @@ export const videoLinkFormat = (link) => {
   }
   return "https://youtube.com/embed/" + key;
 };
+
+export const normalView = () => {
+  document.body.classList.remove("special-dark");
+  document.body.classList.remove("special-light");
+};
+
+export const specialLightView = () => {
+  document.body.classList.remove("special-dark");
+  document.body.classList.add("special-light");
+};
+
+export const specialDarkView = () => {
+  document.body.classList.remove("special-light");
+  document.body.classList.add("special-dark");
+};

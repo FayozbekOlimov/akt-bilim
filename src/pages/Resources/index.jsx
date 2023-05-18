@@ -28,7 +28,7 @@ const Resources = () => {
   }, [dispatch]);
 
   if (status === LOADING) {
-    return "Loading...";
+    return "Yuklanmoqda...";
   }
 
   if (status === FAILED) {

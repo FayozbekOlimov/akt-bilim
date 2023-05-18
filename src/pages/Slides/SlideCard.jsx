@@ -4,11 +4,13 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  useTheme,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { CardTitle, CardWrapper, CardSubtitle } from "./styles";
 
 const SlideCard = ({ id, image, name, text, science }) => {
+  const theme = useTheme();
   return (
     <CardWrapper>
       <CardActionArea component={Link} to={`${id}`}>
@@ -28,7 +30,11 @@ const SlideCard = ({ id, image, name, text, science }) => {
         </CardContent>
       </CardActionArea>
       <CardActions sx={{ pt: 0 }}>
-        <Button size="small" color="success">
+        <Button
+          size="small"
+          color="success"
+          sx={{ fontSize: theme.typography.fontSize }}
+        >
           {science?.name}
         </Button>
       </CardActions>

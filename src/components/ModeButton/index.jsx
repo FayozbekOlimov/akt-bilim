@@ -1,9 +1,7 @@
 import { useContext } from "react";
-import { styled, useTheme } from "@mui/material";
-import { Box, IconButton } from "@mui/material";
-import { ColorModeContext } from "../../theme";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
-import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { styled, useTheme, Box, IconButton } from "@mui/material";
+import { Brightness4, Brightness7 } from "@mui/icons-material";
+import { ThemeContext } from "../../hooks/useMode";
 
 const Wrapper = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -14,14 +12,15 @@ const Wrapper = styled(Box)(({ theme }) => ({
 
 const ModeButton = () => {
   const theme = useTheme();
-  const { toggleColorMode } = useContext(ColorModeContext);
+  const { toggleColorMode } = useContext(ThemeContext);
+
   return (
     <Wrapper>
       <IconButton onClick={toggleColorMode} color="inherit">
         {theme.palette.mode === "dark" ? (
-          <Brightness7Icon />
+          <Brightness7 sx={{ fontSize: "24px" }} />
         ) : (
-          <Brightness4Icon />
+          <Brightness4 sx={{ fontSize: "24px" }} />
         )}
       </IconButton>
     </Wrapper>
