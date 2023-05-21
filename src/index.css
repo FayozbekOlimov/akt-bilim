@@ -34,3 +34,8 @@ body.special-dark video,
 body.special-dark iframe {
   filter: grayscale(0) invert(1);
 }
+
+::selection {
+  background-color: #2e7d32;
+  color: #fff;
+}

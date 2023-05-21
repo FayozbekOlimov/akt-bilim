@@ -16,7 +16,13 @@ const ModeButton = () => {
 
   return (
     <Wrapper>
-      <IconButton onClick={toggleColorMode} color="inherit">
+      <IconButton
+        onClick={toggleColorMode}
+        color="inherit"
+        title={
+          theme.palette.mode === "dark" ? "Yorug' rejim" : "Qorong'u rejim"
+        }
+      >
         {theme.palette.mode === "dark" ? (
           <Brightness7 sx={{ fontSize: "24px" }} />
         ) : (

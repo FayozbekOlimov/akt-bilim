@@ -10,6 +10,9 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
     fontSize: theme.typography.fontSize,
   },
+  [theme.breakpoints.down("sm")]: {
+    padding: `${theme.spacing(1)} ${theme.spacing(1.5)}`,
+  },
 }));
 
 export const StyledTableRow = styled(TableRow)(({ theme }) => ({

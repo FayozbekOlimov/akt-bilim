@@ -21,7 +21,9 @@ const SubjectCard = ({ id, name, tests_count, recourse_count }) => {
       <CardContentWrapper>
         <MenuList disablePadding>
           <MenuItem component={Link} to={`/dashboard/resources/${id}`}>
-            <ListItemText>Resurslar soni</ListItemText>
+            <ListItemText sx={{ userSelect: "text" }}>
+              Resurslar soni
+            </ListItemText>
             <StyledChip
               label={<Typography variant="body2">{recourse_count}</Typography>}
               variant="filled"
@@ -30,7 +32,9 @@ const SubjectCard = ({ id, name, tests_count, recourse_count }) => {
             />
           </MenuItem>
           <MenuItem component={Link} to={`/dashboard/tests/${id}`}>
-            <ListItemText>Testlar soni</ListItemText>
+            <ListItemText sx={{ userSelect: "text" }}>
+              Testlar soni
+            </ListItemText>
             <StyledChip
               label={<Typography variant="body2">{tests_count}</Typography>}
               color="primary"

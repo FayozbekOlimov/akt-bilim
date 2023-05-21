@@ -24,35 +24,42 @@ const VisibilityButton = () => {
     setOpen(true);
   };
 
+  const actionButtons = [
+    {
+      className: "normal",
+      title: "Normal",
+      handleClick: normalView,
+    },
+    {
+      className: "white-black",
+      title: "Oq-qora",
+      handleClick: specialLightView,
+    },
+    {
+      className: "black-white",
+      title: "Qora-oq",
+      handleClick: specialDarkView,
+    },
+  ];
+
   const TooltipActions = () => {
     return (
       <Box p={0.5}>
         <Typography variant="subtitle1">Ko'rinish</Typography>
         <Divider color="inherit" />
         <Grid container spacing={1} my={1}>
-          <Grid item>
-            <MuiButton title="Normal" variant="contained" onClick={normalView}>
-              A
-            </MuiButton>
-          </Grid>
-          <Grid item>
-            <MuiButton
-              title="Oq-qora"
-              variant="contained"
-              onClick={specialLightView}
-            >
-              A
-            </MuiButton>
-          </Grid>
-          <Grid item>
-            <MuiButton
-              title="Qora-oq"
-              variant="contained"
-              onClick={specialDarkView}
-            >
-              A
-            </MuiButton>
-          </Grid>
+          {actionButtons.map((btn, index) => (
+            <Grid item key={index}>
+              <MuiButton
+                className={btn.className}
+                title={btn.title}
+                variant="contained"
+                onClick={btn.handleClick}
+              >
+                A
+              </MuiButton>
+            </Grid>
+          ))}
         </Grid>
         <Typography variant="subtitle1">Shrift o'lchami</Typography>
         <Divider color="inherit" />
@@ -63,7 +70,7 @@ const VisibilityButton = () => {
 
   return (
     <ClickAwayListener onClickAway={handleTooltipClose}>
-      <div>
+      <div title="Ko'rinish">
         <Tooltip
           PopperProps={{
             disablePortal: true,

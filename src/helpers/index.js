@@ -1,3 +1,5 @@
+import { DEFAULT_FONTSIZE, DEFAULT_MODE } from "../constants";
+
 export const dateFormat = (date) => {
   const [mm, dd, yyyy] = new Date(date).toLocaleDateString().split("/");
   return [format(dd), format(mm), yyyy].join("-");
@@ -26,4 +28,26 @@ export const specialLightView = () => {
 export const specialDarkView = () => {
   document.body.classList.remove("special-light");
   document.body.classList.add("special-dark");
+};
+
+export const getModeFromLocalStorage = () =>
+  localStorage.getItem("mode") || DEFAULT_MODE;
+
+export const setModeToLocalStorage = (mode) =>
+  localStorage.setItem("mode", mode);
+
+export const getScaleFromLocalStorage = () => {
+  const scale = localStorage.getItem("scale");
+  return scale ? Number(scale) : 0;
+};
+
+export const setScaleToLocalStorage = (scale) =>
+  localStorage.setItem("scale", scale);
+
+export const calculateFontSize = (scale) =>
+  DEFAULT_FONTSIZE + (5 * scale) / 100;
+
+export const getFontSize = () => {
+  const scale = getScaleFromLocalStorage();
+  return calculateFontSize(scale);
 };

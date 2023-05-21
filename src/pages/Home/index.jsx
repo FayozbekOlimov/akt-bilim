@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import jwtDecode from "jwt-decode";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { List, Toolbar, Typography, IconButton, Divider } from "@mui/material";
-import { Menu, ChevronLeft, AccountCircle } from "@mui/icons-material";
+import { Menu, ChevronLeft } from "@mui/icons-material";
 import {
   AppBar,
   Drawer,
@@ -18,6 +18,7 @@ import {
 } from "./styles";
 import Avatar from "../../components/Avatar";
 import ModeButton from "../../components/ModeButton";
+import UpdateProfileButton from "../../components/UpdateProfileButton";
 import TextToSpeechButton from "../../components/TextToSpeechButton";
 import VisibilityButton from "../../components/VisibilityButton";
 import NavLink from "./NavLink";
@@ -26,6 +27,7 @@ import useMediaQuery from "../../hooks/useMediaQuery";
 import useRefreshToken from "../../hooks/useRefreshToken";
 import { fetchUser } from "../../redux/userSlice";
 import { navLinks } from "./navLinks";
+import VoiceButton from "../../components/VoiceButton";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -51,6 +53,7 @@ export default function Home() {
 
   return (
     <HomeWrapper>
+      <VoiceButton />
       <AppBar position="fixed" open={open}>
         <Toolbar>
           <MuiIconButton
@@ -62,16 +65,10 @@ export default function Home() {
             <Menu sx={{ fontSize: "24px" }} />
           </MuiIconButton>
           <Navbar>
-            <VisibilityButton></VisibilityButton>
+            <VisibilityButton />
             <TextToSpeechButton />
             <ModeButton />
-            <IconButton
-              color="inherit"
-              LinkComponent={Link}
-              to="/dashboard/profile"
-            >
-              <AccountCircle sx={{ fontSize: "24px" }} />
-            </IconButton>
+            <UpdateProfileButton />
           </Navbar>
         </Toolbar>
       </AppBar>

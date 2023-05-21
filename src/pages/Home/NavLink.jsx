@@ -20,7 +20,10 @@ const NavLink = ({ text, to, icon, open }) => {
     <Fragment key={text}>
       {text === "Chiqish" && <Divider />}
       <MuiListItem disablePadding>
-        <MuiListItemButton onClick={() => handleClick(text, to)}>
+        <MuiListItemButton
+          onClick={() => handleClick(text, to)}
+          sx={{ userSelect: "text" }}
+        >
           <MuiListItemIcon open={open}>{icon}</MuiListItemIcon>
           <ListItemText
             primary={text}
