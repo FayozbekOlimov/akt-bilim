@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { FAILED, LOADING } from "../../redux/actionTypes";
 import { fetchResourceById } from "../../redux/resourceSlice";
 import { StyledTableCell, StyledTableRow } from "./styles";
@@ -25,14 +25,19 @@ const Resources = () => {
 
   useEffect(() => {
     dispatch(fetchResourceById({ accessToken: access, id }));
-  }, [dispatch]);
+  }, [dispatch, access]);
 
   if (status === LOADING) {
     return "Yuklanmoqda...";
   }
 
   if (status === FAILED) {
-    return <div>{error}</div>;
+    // return (
+    //   <Typography variant="subtitle1" color="error">
+    //     {error}
+    //   </Typography>
+    // );
+    return <Navigate to="/login" replace />;
   }
 
   if (resource.length === 0) {

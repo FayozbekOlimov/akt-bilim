@@ -10,10 +10,17 @@ const VoiceButton = () => {
   const handleSelection = (e) => {
     const selection = window.getSelection();
     setSelectedText(selection.toString());
-    setStyle({
-      x: e.clientX,
-      y: e.clientY,
-    });
+    if (e.clientX > window.innerWidth) {
+      setStyle({
+        x: window.innerWidth - 100,
+        y: e.clientY,
+      });
+    } else {
+      setStyle({
+        x: e.clientX,
+        y: e.clientY,
+      });
+    }
     if (selection) setShowButton(true);
   };
 

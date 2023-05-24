@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchVideos } from "../../redux/videosSlice";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { FAILED, LOADING } from "../../redux/actionTypes";
 import { VideosSkeleton } from "../../components/Skeleton";
 import VideoCard from "./VideoCard";
+import { Navigate } from "react-router-dom";
 
 const VideoResources = () => {
   const dispatch = useDispatch();
@@ -13,14 +14,27 @@ const VideoResources = () => {
 
   useEffect(() => {
     dispatch(fetchVideos(access));
-  }, [dispatch]);
+  }, [dispatch, access]);
 
   if (status === LOADING) {
     return <VideosSkeleton />;
   }
 
   if (status === FAILED) {
-    return <div>{error}</div>;
+    // return (
+    //   <Typography variant="subtitle1" color="error">
+    //     {error}
+    //   </Typography>
+    // );
+    return <Navigate to="/login" replace />;
+  }
+
+  if (videos.length === 0) {
+    return (
+      <Typography variant="subtitle1">
+        Video qo'llanmalar mavjud emas
+      </Typography>
+    );
   }
 
   return (

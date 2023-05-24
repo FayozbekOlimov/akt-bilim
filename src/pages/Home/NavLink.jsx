@@ -18,7 +18,7 @@ const NavLink = ({ text, to, icon, open }) => {
 
   return (
     <Fragment key={text}>
-      {text === "Chiqish" && <Divider />}
+      {text === "Mening profilim" && <Divider />}
       <MuiListItem disablePadding>
         <MuiListItemButton
           onClick={() => handleClick(text, to)}

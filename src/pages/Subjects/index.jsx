@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { fetchSubjects } from "../../redux/subjectsSlice";
 import { FAILED, LOADING } from "../../redux/actionTypes";
 import { SubjectsSkeleton } from "../../components/Skeleton";
@@ -13,14 +13,23 @@ const Subjects = () => {
 
   useEffect(() => {
     dispatch(fetchSubjects(access));
-  }, [dispatch]);
+  }, [dispatch, access]);
 
   if (status === LOADING) {
     return <SubjectsSkeleton />;
   }
 
   if (status === FAILED) {
-    return <div>{error}</div>;
+    // return (
+    //   <Typography variant="subtitle1" color="error">
+    //     {error}
+    //   </Typography>
+    // );
+    return <Navigate to="/login" replace />;
+  }
+
+  if (subjects.length === 0) {
+    return <Typography variant="subtitle1">Fanlar mavjud emas</Typography>;
   }
 
   return (

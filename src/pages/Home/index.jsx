@@ -61,14 +61,14 @@ export default function Home() {
             edge="start"
             onClick={handleDrawerOpen}
             open={open}
+            sx={{ mr: 0 }}
           >
             <Menu sx={{ fontSize: "24px" }} />
           </MuiIconButton>
           <Navbar>
             <VisibilityButton />
-            <TextToSpeechButton />
             <ModeButton />
-            <UpdateProfileButton />
+            <TextToSpeechButton />
           </Navbar>
         </Toolbar>
       </AppBar>

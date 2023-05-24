@@ -2,6 +2,7 @@ import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
 import ArticleIcon from "@mui/icons-material/Article";
 import QuizIcon from "@mui/icons-material/Quiz";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import { AccountCircle } from "@mui/icons-material";
 
 export const navLinks = [
   {
@@ -18,6 +19,11 @@ export const navLinks = [
     text: "Fanlar",
     to: "subjects",
     icon: <QuizIcon sx={{ fontSize: "24px" }} />,
+  },
+  {
+    text: "Mening profilim",
+    to: "profile",
+    icon: <AccountCircle sx={{ fontSize: "24px" }} />,
   },
   {
     text: "Chiqish",

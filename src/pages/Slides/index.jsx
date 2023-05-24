@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SlidesSkeleton } from "../../components/Skeleton";
@@ -13,14 +13,23 @@ const Slides = () => {
 
   useEffect(() => {
     dispatch(fetchSlides(access));
-  }, [dispatch]);
+  }, [dispatch, access]);
 
   if (status === LOADING) {
     return <SlidesSkeleton />;
   }
 
   if (status === FAILED) {
-    return <div>{error}</div>;
+    // return (
+    //   <Typography variant="subtitle1" color="error">
+    //     {error}
+    //   </Typography>
+    // );
+    return <Navigate to="/login" replace />;
+  }
+
+  if (slides.length === 0) {
+    return <Typography variant="subtitle1">Taqdimotlar mavjud emas</Typography>;
   }
 
   return (

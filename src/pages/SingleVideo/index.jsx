@@ -24,14 +24,19 @@ const SingleVideo = () => {
 
   useEffect(() => {
     dispatch(fetchVideoById({ accessToken: access, id }));
-  }, [dispatch]);
+  }, [dispatch, access]);
 
   if (status === LOADING) {
     return <SingleVideoSkeleton />;
   }
 
   if (status === FAILED) {
-    return <div>{error}</div>;
+    // return (
+    //   <Typography variant="subtitle1" color="error">
+    //     {error}
+    //   </Typography>
+    // );
+    return <Navigate to="/login" replace />;
   }
 
   return (

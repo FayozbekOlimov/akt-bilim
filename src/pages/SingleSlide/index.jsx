@@ -1,4 +1,4 @@
-import { Box, Divider } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -22,14 +22,19 @@ const SingleSlide = () => {
 
   useEffect(() => {
     dispatch(fetchSlideById({ accessToken: access, id }));
-  }, [dispatch]);
+  }, [dispatch, access]);
 
   if (status === LOADING) {
     return <SingleSlideSkeleton />;
   }
 
   if (status === FAILED) {
-    return <div>{error}</div>;
+    // return (
+    //   <Typography variant="subtitle1" color="error">
+    //     {error}
+    //   </Typography>
+    // );
+    return <Navigate to="/login" replace />;
   }
 
   return (

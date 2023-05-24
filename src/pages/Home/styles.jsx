@@ -44,7 +44,7 @@ export const DrawerHeader = styled("div")(({ theme }) => ({
 export const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
+  zIndex: open ? theme.zIndex.drawer - 1 : theme.zIndex.drawer + 1,
   backgroundColor: theme.palette.success.dark,
   transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
@@ -92,7 +92,7 @@ export const Main = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
     padding: theme.spacing(3),
   },
-  height: "100vh",
+  minHeight: "100vh",
   backgroundColor: theme.palette.background.default,
 }));
 
