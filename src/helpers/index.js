@@ -1,11 +1,12 @@
 import { DEFAULT_FONTSIZE, DEFAULT_MODE } from "../constants";
 
 export const dateFormat = (date) => {
+  console.log(date);
   const [mm, dd, yyyy] = new Date(date).toLocaleDateString().split("/");
   return [format(dd), format(mm), yyyy].join("-");
 };
 
-const format = (x) => (x < 10 ? "0" + x : x);
+const format = (x) => (+x < 10 ? "0" + +x : x);
 
 export const videoLinkFormat = (link) => {
   let key = "";

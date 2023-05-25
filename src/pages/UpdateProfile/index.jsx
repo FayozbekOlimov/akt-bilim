@@ -13,6 +13,7 @@ import { fetchUser } from "../../redux/userSlice";
 import { useEffect, useState } from "react";
 import { updateProfileData } from "../../redux/profileSlice";
 import jwtDecode from "jwt-decode";
+import ReactInputMask from "react-input-mask";
 
 const UpdateProfile = () => {
   const theme = useTheme();
@@ -52,9 +53,11 @@ const UpdateProfile = () => {
     const { name, value } = e.target;
     formik.setFieldValue(name, value);
 
-    const isAnyFieldChanged = Object.keys(formik.initialValues).some(
+    let isAnyFieldChanged = Object.keys(formik.initialValues).some(
       (x) => user[x] === value || user?.user[x] === value
     );
+
+    if (name === "phone" && value.includes("_")) isAnyFieldChanged = true;
 
     setIsChanged(!isAnyFieldChanged);
   };
@@ -132,7 +135,8 @@ const UpdateProfile = () => {
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <TextField
+            <ReactInputMask
+              mask="+\9\9\8 (99) 999-99-99"
               name="phone"
               label="Telefon raqam"
               variant="outlined"
@@ -140,7 +144,10 @@ const UpdateProfile = () => {
               fullWidth
               value={formik.values.phone}
               onChange={handleChange}
-            />
+              required
+            >
+              {(inputProps) => <TextField {...inputProps} type="tel" />}
+            </ReactInputMask>
           </Grid>
           {/* <Grid item xs={12}>
             <TextField
