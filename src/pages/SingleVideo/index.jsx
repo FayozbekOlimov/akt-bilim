@@ -1,7 +1,7 @@
 import { Divider, Grid, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { IMAGE_URL } from "../../api/urls";
 import { SingleVideoSkeleton } from "../../components/Skeleton";
 import { dateFormat, videoLinkFormat } from "../../helpers";
@@ -31,12 +31,15 @@ const SingleVideo = () => {
   }
 
   if (status === FAILED) {
-    // return (
-    //   <Typography variant="subtitle1" color="error">
-    //     {error}
-    //   </Typography>
-    // );
-    return <Navigate to="/login" replace />;
+    if (error === "Network Error") {
+      return (
+        <Typography variant="subtitle1" color="error">
+          Internetga ulanishda xatolik
+        </Typography>
+      );
+    } else {
+      return <Navigate to="/login" replace />;
+    }
   }
 
   return (
@@ -58,7 +61,10 @@ const SingleVideo = () => {
           </VideoDateBox>
         </VideoHeader>
         <Divider sx={{ my: 1 }} />
-        <VideoText variant="body1">{video?.text}</VideoText>
+        <VideoText
+          variant="body1"
+          dangerouslySetInnerHTML={{ __html: video?.text }}
+        />
       </Grid>
     </Grid>
   );

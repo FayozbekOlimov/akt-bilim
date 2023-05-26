@@ -1,7 +1,7 @@
 import { Box, Divider, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { SingleSlideSkeleton } from "../../components/Skeleton";
 import { dateFormat } from "../../helpers";
 import { FAILED, LOADING } from "../../redux/actionTypes";
@@ -29,12 +29,15 @@ const SingleSlide = () => {
   }
 
   if (status === FAILED) {
-    // return (
-    //   <Typography variant="subtitle1" color="error">
-    //     {error}
-    //   </Typography>
-    // );
-    return <Navigate to="/login" replace />;
+    if (error === "Network Error") {
+      return (
+        <Typography variant="subtitle1" color="error">
+          Internetga ulanishda xatolik
+        </Typography>
+      );
+    } else {
+      return <Navigate to="/login" replace />;
+    }
   }
 
   return (
@@ -51,7 +54,10 @@ const SingleSlide = () => {
         <ImgBox>
           <img src={slide?.image} alt="slide img" />
         </ImgBox>
-        {slide?.text}
+        <Typography
+          variant="body1"
+          dangerouslySetInnerHTML={{ __html: slide?.text }}
+        />
       </Box>
     </Box>
   );

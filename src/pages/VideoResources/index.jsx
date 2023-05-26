@@ -21,12 +21,15 @@ const VideoResources = () => {
   }
 
   if (status === FAILED) {
-    // return (
-    //   <Typography variant="subtitle1" color="error">
-    //     {error}
-    //   </Typography>
-    // );
-    return <Navigate to="/login" replace />;
+    if (error === "Network Error") {
+      return (
+        <Typography variant="subtitle1" color="error">
+          Internetga ulanishda xatolik
+        </Typography>
+      );
+    } else {
+      return <Navigate to="/login" replace />;
+    }
   }
 
   if (videos.length === 0) {

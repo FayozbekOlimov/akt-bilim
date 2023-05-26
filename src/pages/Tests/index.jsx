@@ -1,7 +1,16 @@
-import { Typography } from "@mui/material";
+import { Grid } from "@mui/material";
+import TestCard from "./TestCard";
 
 const Tests = () => {
-  return <Typography variant="subtitle1">Testlar mavjud emas</Typography>;
+  return (
+    <Grid container spacing={2}>
+      {Array.from(Array(3)).map((item, index) => (
+        <Grid item xs={12} md={6} lg={4} key={index}>
+          <TestCard />
+        </Grid>
+      ))}
+    </Grid>
+  );
 };
 
 export default Tests;

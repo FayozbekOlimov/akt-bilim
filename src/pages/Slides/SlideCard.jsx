@@ -24,9 +24,11 @@ const SlideCard = ({ id, image, name, text, science }) => {
           <CardTitle variant="subtitle1" gutterBottom>
             {name}
           </CardTitle>
-          <CardSubtitle variant="body2" color="text.secondary">
-            {text}
-          </CardSubtitle>
+          <CardSubtitle
+            variant="body2"
+            color="text.secondary"
+            dangerouslySetInnerHTML={{ __html: text }}
+          />
         </CardContent>
       </CardActionArea>
       <CardActions sx={{ pt: 0 }}>

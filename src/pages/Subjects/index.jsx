@@ -5,6 +5,7 @@ import { fetchSubjects } from "../../redux/subjectsSlice";
 import { FAILED, LOADING } from "../../redux/actionTypes";
 import { SubjectsSkeleton } from "../../components/Skeleton";
 import SubjectCard from "./SubjectCard";
+import { Navigate } from "react-router-dom";
 
 const Subjects = () => {
   const dispatch = useDispatch();
@@ -20,12 +21,15 @@ const Subjects = () => {
   }
 
   if (status === FAILED) {
-    // return (
-    //   <Typography variant="subtitle1" color="error">
-    //     {error}
-    //   </Typography>
-    // );
-    return <Navigate to="/login" replace />;
+    if (error === "Network Error") {
+      return (
+        <Typography variant="subtitle1" color="error">
+          Internetga ulanishda xatolik
+        </Typography>
+      );
+    } else {
+      return <Navigate to="/login" replace />;
+    }
   }
 
   if (subjects.length === 0) {
