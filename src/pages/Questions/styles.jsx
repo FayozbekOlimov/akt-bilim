@@ -33,6 +33,7 @@ export const QueWrapper = styled(Box)(({ theme }) => ({
 }));
 
 export const QueBox = styled(Box)(({ theme }) => ({
+  cursor: "pointer",
   width: "40px",
   height: "40px",
   borderRadius: "50%",
