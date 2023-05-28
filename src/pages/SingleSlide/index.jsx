@@ -2,6 +2,7 @@ import { Box, Divider, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useParams } from "react-router-dom";
+import ErrorHandler from "../../components/ErrorHandler";
 import { SingleSlideSkeleton } from "../../components/Skeleton";
 import { dateFormat } from "../../helpers";
 import { FAILED, LOADING } from "../../redux/actionTypes";
@@ -29,15 +30,7 @@ const SingleSlide = () => {
   }
 
   if (status === FAILED) {
-    if (error === "Network Error") {
-      return (
-        <Typography variant="subtitle1" color="error">
-          Internetga ulanishda xatolik
-        </Typography>
-      );
-    } else {
-      return <Navigate to="/login" replace />;
-    }
+    return <ErrorHandler error={error} />;
   }
 
   return (

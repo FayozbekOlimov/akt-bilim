@@ -1,7 +1,12 @@
-import { DEFAULT_FONTSIZE, DEFAULT_MODE } from "../constants";
+import {
+  DEFAULT_FONTSIZE,
+  DEFAULT_MODE,
+  ERR_NETWORK_MSG,
+  SERVER_ERROR_MSG,
+  TOKEN_EXPIRED_MSG,
+} from "../constants";
 
 export const dateFormat = (date) => {
-  console.log(date);
   const [mm, dd, yyyy] = new Date(date).toLocaleDateString().split("/");
   return [format(dd), format(mm), yyyy].join("-");
 };
@@ -55,4 +60,14 @@ export const calculateFontSize = (scale) =>
 export const getFontSize = () => {
   const scale = getScaleFromLocalStorage();
   return calculateFontSize(scale);
+};
+
+export const errorHandler = (error) => {
+  if (error.code === "ERR_NETWORK") {
+    throw new Error(ERR_NETWORK_MSG);
+  } else if (error.response.status === 401) {
+    throw new Error(TOKEN_EXPIRED_MSG);
+  } else {
+    throw new Error(SERVER_ERROR_MSG);
+  }
 };

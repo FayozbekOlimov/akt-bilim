@@ -16,6 +16,7 @@ import { fetchResourceById } from "../../redux/resourceSlice";
 import { StyledTableCell, StyledTableRow } from "./styles";
 import { dateFormat } from "../../helpers";
 import { IMAGE_URL } from "../../api/urls";
+import ErrorHandler from "../../components/ErrorHandler";
 
 const Resources = () => {
   const { id } = useParams();
@@ -32,15 +33,7 @@ const Resources = () => {
   }
 
   if (status === FAILED) {
-    if (error === "Network Error") {
-      return (
-        <Typography variant="subtitle1" color="error">
-          Internetga ulanishda xatolik
-        </Typography>
-      );
-    } else {
-      return <Navigate to="/login" replace />;
-    }
+    return <ErrorHandler error={error} />;
   }
 
   if (resource.length === 0) {

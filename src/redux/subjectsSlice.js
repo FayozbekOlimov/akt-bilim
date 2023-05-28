@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { BASE_API } from "../api";
 import { subjectsUrl } from "../api/urls";
+import { errorHandler } from "../helpers";
 import { FAILED, IDLE, LOADING, SUCCEEDED } from "./actionTypes";
 
 const initialState = {
@@ -20,7 +21,7 @@ export const fetchSubjects = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      throw new Error(error.message);
+      errorHandler(error);
     }
   }
 );

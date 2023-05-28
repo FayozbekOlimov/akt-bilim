@@ -7,6 +7,7 @@ import {
   Chip,
   Typography,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import { CardWrapper } from "./styles";
 
 const TestCard = () => {
@@ -39,7 +40,13 @@ const TestCard = () => {
           <Button color="success" variant="contained" disabled size="small">
             Natijalar
           </Button>
-          <Button color="success" variant="contained" size="small">
+          <Button
+            color="success"
+            variant="contained"
+            size="small"
+            LinkComponent={Link}
+            to="1"
+          >
             Testni boshlash
           </Button>
         </Box>

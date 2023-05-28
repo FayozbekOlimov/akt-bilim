@@ -6,6 +6,7 @@ import { FAILED, LOADING } from "../../redux/actionTypes";
 import { SubjectsSkeleton } from "../../components/Skeleton";
 import SubjectCard from "./SubjectCard";
 import { Navigate } from "react-router-dom";
+import ErrorHandler from "../../components/ErrorHandler";
 
 const Subjects = () => {
   const dispatch = useDispatch();
@@ -21,15 +22,7 @@ const Subjects = () => {
   }
 
   if (status === FAILED) {
-    if (error === "Network Error") {
-      return (
-        <Typography variant="subtitle1" color="error">
-          Internetga ulanishda xatolik
-        </Typography>
-      );
-    } else {
-      return <Navigate to="/login" replace />;
-    }
+    return <ErrorHandler error={error} />;
   }
 
   if (subjects.length === 0) {

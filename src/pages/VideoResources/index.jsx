@@ -6,6 +6,7 @@ import { FAILED, LOADING } from "../../redux/actionTypes";
 import { VideosSkeleton } from "../../components/Skeleton";
 import VideoCard from "./VideoCard";
 import { Navigate } from "react-router-dom";
+import ErrorHandler from "../../components/ErrorHandler";
 
 const VideoResources = () => {
   const dispatch = useDispatch();
@@ -21,15 +22,7 @@ const VideoResources = () => {
   }
 
   if (status === FAILED) {
-    if (error === "Network Error") {
-      return (
-        <Typography variant="subtitle1" color="error">
-          Internetga ulanishda xatolik
-        </Typography>
-      );
-    } else {
-      return <Navigate to="/login" replace />;
-    }
+    return <ErrorHandler error={error} />;
   }
 
   if (videos.length === 0) {

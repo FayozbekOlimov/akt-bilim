@@ -2,6 +2,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { loginUrl } from "../api/urls";
 import { BASE_API } from "../api";
 import { FAILED, IDLE, LOADING, SUCCEEDED } from "./actionTypes";
+import {
+  ERR_NETWORK_MSG,
+  SERVER_ERROR_MSG,
+  UNAUTHORIZED_MSG,
+} from "../constants";
 
 const initialState = {
   user: null,
@@ -21,11 +26,11 @@ export const login = createAsyncThunk(
       return response.data;
     } catch (error) {
       if (error.code === "ERR_NETWORK") {
-        throw new Error("Internetga ulanishda xatolik");
+        throw new Error(ERR_NETWORK_MSG);
       } else if (error.response.status === 401) {
-        throw new Error("Noto'g'ri foydalanuvchi nomi yoki parol");
+        throw new Error(UNAUTHORIZED_MSG);
       } else {
-        throw new Error("Serverda xatolik");
+        throw new Error(SERVER_ERROR_MSG);
       }
     }
   }

@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { BASE_API } from "../api";
 import { slidesUrl } from "../api/urls";
+import { errorHandler } from "../helpers";
 import { FAILED, IDLE, LOADING, SUCCEEDED } from "./actionTypes";
 
 const initialState = {
@@ -20,7 +21,7 @@ export const fetchSlideById = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      throw new Error(error.message);
+      errorHandler(error);
     }
   }
 );

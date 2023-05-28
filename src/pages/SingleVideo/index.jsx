@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useParams } from "react-router-dom";
 import { IMAGE_URL } from "../../api/urls";
+import ErrorHandler from "../../components/ErrorHandler";
 import { SingleVideoSkeleton } from "../../components/Skeleton";
 import { dateFormat, videoLinkFormat } from "../../helpers";
 import { FAILED, LOADING } from "../../redux/actionTypes";
@@ -31,15 +32,7 @@ const SingleVideo = () => {
   }
 
   if (status === FAILED) {
-    if (error === "Network Error") {
-      return (
-        <Typography variant="subtitle1" color="error">
-          Internetga ulanishda xatolik
-        </Typography>
-      );
-    } else {
-      return <Navigate to="/login" replace />;
-    }
+    return <ErrorHandler error={error} />;
   }
 
   return (

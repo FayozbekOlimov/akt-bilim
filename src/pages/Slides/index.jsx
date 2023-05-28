@@ -2,6 +2,7 @@ import { Grid, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import ErrorHandler from "../../components/ErrorHandler";
 import { SlidesSkeleton } from "../../components/Skeleton";
 import { FAILED, LOADING } from "../../redux/actionTypes";
 import { fetchSlides } from "../../redux/slidesSlice";
@@ -21,15 +22,7 @@ const Slides = () => {
   }
 
   if (status === FAILED) {
-    if (error === "Network Error") {
-      return (
-        <Typography variant="subtitle1" color="error">
-          Internetga ulanishda xatolik
-        </Typography>
-      );
-    } else {
-      return <Navigate to="/login" replace />;
-    }
+    return <ErrorHandler error={error} />;
   }
 
   if (slides.length === 0) {
