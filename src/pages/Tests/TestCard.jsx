@@ -4,37 +4,33 @@ import {
   CardActions,
   CardContent,
   CardHeader,
-  Chip,
+  Divider,
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import { dateFormat, formatTime } from "../../helpers";
 import { CardWrapper } from "./styles";
 
-const TestCard = () => {
+const TestCard = ({ name, end, number, duration, possibilities, required }) => {
   return (
     <CardWrapper>
-      <CardHeader
-        title="Arifmetikaga oid test"
-        subheader={
-          <Chip
-            label="30.05.2023"
-            size="small"
-            color="primary"
-            variant="contained"
-          />
-        }
-      />
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          Savollar soni: <b>20 ta</b>
+      <CardHeader sx={{ py: 1.5 }} title={name} />
+      <Divider />
+      <CardContent sx={{ py: 1.5 }}>
+        <Typography variant="body1" color="text.secondary">
+          Muddat: <b>{dateFormat(end)} gacha</b>
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Ajratilgan vaqt: <b>20 daqiqa</b>
+        <Typography variant="body1" color="text.secondary">
+          Savollar soni: <b>{number} ta</b>
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Urinishlar soni: <b>3 marta</b>
+        <Typography variant="body1" color="text.secondary">
+          Ajratilgan vaqt: <b>{formatTime(duration)}</b>
+        </Typography>
+        <Typography variant="body1" color="text.secondary">
+          Urinishlar soni: <b>{possibilities} marta</b>
         </Typography>
       </CardContent>
+      <Divider />
       <CardActions disableSpacing>
         <Box width="100%" display="flex" justifyContent="flex-end" gap={1}>
           <Button color="success" variant="contained" disabled size="small">

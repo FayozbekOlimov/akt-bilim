@@ -11,3 +11,6 @@ export const slidesUrl = "slides/";
 
 export const profileUrl = "update-student/";
 export const userUrl = "students/";
+
+export const testsUrl = "list-of-tests/";
+export const startTestUrl = "start-new-test/";

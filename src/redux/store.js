@@ -10,6 +10,8 @@ import slidesReducer from "./slidesSlice";
 import singleSlideReducer from "./singleSlideSlice";
 import resourceReducer from "./resourceSlice";
 import userReducer from "./userSlice";
+import testsReducer from "./testsSlice";
+import testDataReducer from "./testDataSlice";
 
 const persistConfig = {
   key: "root",
@@ -28,6 +30,8 @@ const store = configureStore({
     slide: singleSlideReducer,
     resource: resourceReducer,
     user: userReducer,
+    tests: testsReducer,
+    testData: testDataReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

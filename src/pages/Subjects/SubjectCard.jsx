@@ -31,7 +31,7 @@ const SubjectCard = ({ id, name, tests_count, recourse_count }) => {
               color="primary"
             />
           </MenuItem>
-          <MenuItem component={Link} to={`/dashboard/tests/${name}`}>
+          <MenuItem component={Link} to={`/dashboard/tests/${id}`}>
             <ListItemText sx={{ userSelect: "text" }}>
               Testlar soni
             </ListItemText>

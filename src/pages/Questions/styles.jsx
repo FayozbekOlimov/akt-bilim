@@ -13,7 +13,7 @@ export const QueNumber = styled(Wrapper)(({ theme }) => ({
 }));
 
 export const Option = styled(FormControlLabel)(({ theme }) => ({
-  display: "block",
+  display: "flex",
   border: `2px solid ${theme.palette.primary.main}`,
   marginRight: 0,
   marginLeft: 0,

@@ -13,6 +13,17 @@ export const dateFormat = (date) => {
 
 const format = (x) => (+x < 10 ? "0" + +x : x);
 
+export const formatTime = (timeStr) => {
+  const [hours, minutes, seconds] = timeStr.split(":").map(Number);
+  let ans = "";
+
+  if (hours > 0) ans += `${hours} soat`;
+  if (minutes > 0) ans += `${minutes} daqiqa`;
+  if (seconds > 0) ans += `${seconds} soniya`;
+
+  return ans;
+};
+
 export const videoLinkFormat = (link) => {
   let key = "";
   if (link) {

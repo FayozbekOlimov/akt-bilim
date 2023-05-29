@@ -1,7 +1,7 @@
 import { Divider, Grid, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { IMAGE_URL } from "../../api/urls";
 import ErrorHandler from "../../components/ErrorHandler";
 import { SingleVideoSkeleton } from "../../components/Skeleton";

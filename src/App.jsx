@@ -25,7 +25,7 @@ function App() {
         <Route path="subjects" element={<Subjects />} />
         <Route path="videos/:id" element={<SingleVideo />} />
         <Route path="resources/:id" element={<Resources />} />
-        <Route path="tests/:subject" element={<Tests />} />
+        <Route path="tests/:subjectId" element={<Tests />} />
         <Route path="tests/:subject/:id" element={<Questions />} />
         <Route path="profile" element={<UpdateProfile />} />
         <Route path="*" element={<NotFound />} />

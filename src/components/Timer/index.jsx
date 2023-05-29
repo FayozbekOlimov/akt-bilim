@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { LinearProgress } from "@mui/material";
+import { Box, LinearProgress, Typography } from "@mui/material";
 
 const TimerWithProgressBar = ({ minutes }) => {
   const totalTimeInSeconds = minutes * 60;
@@ -39,10 +39,18 @@ const TimerWithProgressBar = ({ minutes }) => {
   };
 
   return (
-    <div>
-      <LinearProgress variant="determinate" value={progress} />
-      <div>{formatTime(timeLeft)}</div>
-    </div>
+    <Box display="flex" gap={1} alignItems="center">
+      <Typography variant="subtitle2" color="text.primary">
+        {formatTime(timeLeft)}
+      </Typography>
+      <Box width="100%">
+        <LinearProgress
+          variant="determinate"
+          value={progress}
+          sx={{ height: 6, borderRadius: 2 }}
+        />
+      </Box>
+    </Box>
   );
 };
 
