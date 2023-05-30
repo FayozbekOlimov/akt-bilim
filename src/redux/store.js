@@ -12,6 +12,10 @@ import resourceReducer from "./resourceSlice";
 import userReducer from "./userSlice";
 import testsReducer from "./testsSlice";
 import testDataReducer from "./testDataSlice";
+import testDetailReducer from "./testDetailSlice";
+import startedTestDataReducer from "./startedTestDataSlice";
+import optionReducer from "./optionSlice";
+import submitTestReducer from "./submitTestSlice";
 
 const persistConfig = {
   key: "root",
@@ -32,6 +36,10 @@ const store = configureStore({
     user: userReducer,
     tests: testsReducer,
     testData: testDataReducer,
+    startedTestData: startedTestDataReducer,
+    testDetail: testDetailReducer,
+    option: optionReducer,
+    submitTest: submitTestReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

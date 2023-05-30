@@ -10,7 +10,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import ErrorHandler from "../../components/ErrorHandler";
@@ -18,8 +18,7 @@ import Timer from "../../components/Timer";
 import { timeToInt } from "../../helpers";
 import { FAILED, LOADING } from "../../redux/actionTypes";
 import { chooseOption } from "../../redux/optionSlice";
-import { submitTest } from "../../redux/submitTestSlice";
-import { fetchTestDataById } from "../../redux/testDataSlice";
+import { fetchStartedTestDataById } from "../../redux/startedTestDataSlice";
 import {
   Option,
   Options,
@@ -27,17 +26,19 @@ import {
   QueNumber,
   QueWrapper,
   Wrapper,
-} from "./styles";
+} from "../Questions/styles";
 
-const Questions = () => {
+const StartedQuestions = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { access } = useSelector((state) => state.login?.user);
-  const { testData, status, error } = useSelector((state) => state.testData);
+  const { startedTestData, status, error } = useSelector(
+    (state) => state.startedTestData
+  );
   const [quizIndex, setQuizIndex] = useState(0);
 
   useEffect(() => {
-    dispatch(fetchTestDataById({ accessToken: access, id }));
+    dispatch(fetchStartedTestDataById({ accessToken: access, id }));
   }, [dispatch, access]);
 
   if (status === LOADING) {
@@ -49,7 +50,7 @@ const Questions = () => {
   }
 
   const nextQuiz = () => {
-    if (quizIndex < testData?.questions.length - 1) {
+    if (quizIndex < startedTestData?.questions.length - 1) {
       setQuizIndex(quizIndex + 1);
     }
   };
@@ -64,7 +65,8 @@ const Questions = () => {
     setQuizIndex(id);
   };
 
-  const question = testData?.questions && testData?.questions[quizIndex];
+  const question =
+    startedTestData?.questions && startedTestData?.questions[quizIndex];
 
   const handleChange = (event) => {
     const [queId, option] = event.target.value.split("-");
@@ -74,7 +76,7 @@ const Questions = () => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} lg={8}>
-        <Timer minutes={timeToInt(testData?.duration)} />
+        <Timer minutes={timeToInt(startedTestData?.duration)} />
       </Grid>
       <Grid item xs={12} lg={8}>
         <Stack direction="column" spacing={2}>
@@ -99,7 +101,7 @@ const Questions = () => {
             </Typography>
             <IconButton
               color="success"
-              disabled={quizIndex === testData?.questions?.length - 1}
+              disabled={quizIndex === startedTestData?.questions?.length - 1}
               onClick={nextQuiz}
             >
               <East />
@@ -116,7 +118,7 @@ const Questions = () => {
               <Options
                 aria-labelledby={`demo-radio-buttons-group-label-${question?.id}`}
                 name={`radio-buttons-group-${question?.id}`}
-                onChange={(event) => handleChange(event)}
+                onChange={handleChange}
               >
                 <Option
                   value={`${question?.id}-1`}
@@ -126,6 +128,7 @@ const Questions = () => {
                       dangerouslySetInnerHTML={{ __html: question?.option1 }}
                     />
                   }
+                  checked={question?.choosen === 1}
                 />
                 <Option
                   value={`${question?.id}-2`}
@@ -135,6 +138,7 @@ const Questions = () => {
                       dangerouslySetInnerHTML={{ __html: question?.option2 }}
                     />
                   }
+                  checked={question?.choosen === 2}
                 />
                 <Option
                   value={`${question?.id}-3`}
@@ -144,6 +148,7 @@ const Questions = () => {
                       dangerouslySetInnerHTML={{ __html: question?.option3 }}
                     />
                   }
+                  checked={question?.choosen === 3}
                 />
                 <Option
                   value={`${question?.id}-4`}
@@ -153,6 +158,7 @@ const Questions = () => {
                       dangerouslySetInnerHTML={{ __html: question?.option4 }}
                     />
                   }
+                  checked={question?.choosen === 4}
                 />
               </Options>
             </FormControl>
@@ -176,7 +182,7 @@ const Questions = () => {
           </Box>
           <Divider sx={{ my: 0.5 }} />
           <QueWrapper>
-            {testData?.questions?.map((_, i) => (
+            {startedTestData?.questions?.map((_, i) => (
               <QueBox key={i} onClick={() => setQuiz(i)}>
                 <Typography color="#000" fontWeight={500} variant="body1">
                   {i + 1}
@@ -190,7 +196,7 @@ const Questions = () => {
             color="success"
             size="small"
             LinkComponent={Link}
-            to={`/dashboard/tests/result/${testData?.id}`}
+            to={`/dashboard/tests/result/${id}`}
           >
             Testni yakunlash
           </Button>
@@ -200,4 +206,4 @@ const Questions = () => {
   );
 };
 
-export default Questions;
+export default StartedQuestions;

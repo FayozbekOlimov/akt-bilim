@@ -12,6 +12,8 @@ import SingleSlide from "./pages/SingleSlide";
 import Tests from "./pages/Tests";
 import NotFound from "./pages/NotFound";
 import Questions from "./pages/Questions";
+import StartedQuestions from "./pages/StartedQuestions";
+import SubmitTest from "./pages/SubmitTest";
 
 function App() {
   return (
@@ -26,7 +28,9 @@ function App() {
         <Route path="videos/:id" element={<SingleVideo />} />
         <Route path="resources/:id" element={<Resources />} />
         <Route path="tests/:subjectId" element={<Tests />} />
-        <Route path="tests/:subject/:id" element={<Questions />} />
+        <Route path="tests/:subjectId/:id" element={<Questions />} />
+        <Route path="tests/started/:id" element={<StartedQuestions />} />
+        <Route path="tests/result/:id" element={<SubmitTest />} />
         <Route path="profile" element={<UpdateProfile />} />
         <Route path="*" element={<NotFound />} />
       </Route>

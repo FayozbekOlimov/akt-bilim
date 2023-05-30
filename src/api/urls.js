@@ -14,3 +14,7 @@ export const userUrl = "students/";
 
 export const testsUrl = "list-of-tests/";
 export const startTestUrl = "start-new-test/";
+export const testDetailUrl = "test-detail/";
+export const startedTestUrl = "results/";
+export const optionUrl = "add-choosen-test-option/";
+export const submitTestUrl = "submit-test/";

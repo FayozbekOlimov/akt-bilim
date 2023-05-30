@@ -13,6 +13,13 @@ export const dateFormat = (date) => {
 
 const format = (x) => (+x < 10 ? "0" + +x : x);
 
+export const timeToInt = (timeStr) => {
+  if (timeStr) {
+    const [hours, minutes, seconds] = timeStr.split(":").map(Number);
+    return hours * 60 + minutes;
+  }
+};
+
 export const formatTime = (timeStr) => {
   const [hours, minutes, seconds] = timeStr.split(":").map(Number);
   let ans = "";

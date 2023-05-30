@@ -1,20 +1,20 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { BASE_API } from "../api";
-import { startTestUrl } from "../api/urls";
+import { startedTestUrl } from "../api/urls";
 import { errorHandler } from "../helpers";
 import { FAILED, IDLE, LOADING, SUCCEEDED } from "./actionTypes";
 
 const initialState = {
-  testData: {},
+  startedTestData: {},
   status: IDLE,
   error: null,
 };
 
-export const fetchTestDataById = createAsyncThunk(
-  "testData/fetchTestDataById",
+export const fetchStartedTestDataById = createAsyncThunk(
+  "startedTestData/fetchStartedTestDataById",
   async ({ accessToken, id }) => {
     try {
-      const response = await BASE_API.get(`${startTestUrl}${id}/`, {
+      const response = await BASE_API.get(`${startedTestUrl}${id}/`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -26,24 +26,24 @@ export const fetchTestDataById = createAsyncThunk(
   }
 );
 
-const testDataSlice = createSlice({
-  name: "testData",
+const startedTestDataSlice = createSlice({
+  name: "startedTestData",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchTestDataById.pending, (state) => {
+      .addCase(fetchStartedTestDataById.pending, (state) => {
         state.status = LOADING;
       })
-      .addCase(fetchTestDataById.fulfilled, (state, action) => {
+      .addCase(fetchStartedTestDataById.fulfilled, (state, action) => {
         state.status = SUCCEEDED;
-        state.testData = action.payload;
+        state.startedTestData = action.payload;
       })
-      .addCase(fetchTestDataById.rejected, (state, action) => {
+      .addCase(fetchStartedTestDataById.rejected, (state, action) => {
         state.status = FAILED;
         state.error = action.error.message;
       });
   },
 });
 
-export default testDataSlice.reducer;
+export default startedTestDataSlice.reducer;
