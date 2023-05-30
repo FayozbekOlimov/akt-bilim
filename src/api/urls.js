@@ -1,5 +1,5 @@
-export const BASE_URL = "https://najmiddin.pythonanywhere.com/api/";
-export const IMAGE_URL = "https://najmiddin.pythonanywhere.com/";
+export const BASE_URL = "https://ulugbek01.pythonanywhere.com/api/";
+export const IMAGE_URL = "https://ulugbek01.pythonanywhere.com/";
 
 export const loginUrl = "token/";
 export const refreshUrl = "token/refresh/";
