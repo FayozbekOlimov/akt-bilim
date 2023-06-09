@@ -18,7 +18,6 @@ import {
 } from "./styles";
 import Avatar from "../../components/Avatar";
 import ModeButton from "../../components/ModeButton";
-import UpdateProfileButton from "../../components/UpdateProfileButton";
 import TextToSpeechButton from "../../components/TextToSpeechButton";
 import VisibilityButton from "../../components/VisibilityButton";
 import NavLink from "./NavLink";
@@ -75,7 +74,7 @@ export default function Home() {
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <Typography variant="h6" ml={1}>
-            Student
+            O'quvchi
           </Typography>
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeft sx={{ fontSize: "24px" }} />

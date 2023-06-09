@@ -8,6 +8,9 @@ export const CardWrapper = styled(Card)({
 export const CardTitle = styled(CardHeader)(({ theme }) => ({
   backgroundColor: theme.palette.success.dark,
   color: "#fff",
+  "& span": {
+    fontSize: theme.typography.fontSize + 4,
+  },
 }));
 
 export const CardContentWrapper = styled(CardContent)(({ theme }) => ({
